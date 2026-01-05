@@ -62,32 +62,44 @@
         messagingSenderId: "472185106488",
         appId: "1:472185106488:web:496f37e901690987f536cd"
       };
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-      // -----------------------------------------
-
+    
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-      const persoRef = doc(db, "personnages", "Joueur1");
-
+    
+      // --- LOGIQUE MULTI-JOUEURS ---
+      // On récupère le nom du joueur dans l'URL (ex: ?id=Valerius)
+      const urlParams = new URLSearchParams(window.location.search);
+      let joueurID = urlParams.get('id');
+    
+      // Si pas d'ID dans l'URL, on demande le nom
+      if (!joueurID) {
+          joueurID = prompt("Entrez votre nom de personnage pour charger votre fiche :");
+          if (!joueurID) joueurID = "Anonyme"; // Secours
+      }
+    
+      // On pointe vers le document spécifique de CE joueur
+      const persoRef = doc(db, "personnages", joueurID);
+      
+      // Afficher le nom du joueur sur la page
+      document.querySelector('h1').innerText = "Fiche de : " + joueurID;
+    
       const fields = ["nomPerso", "force", "endurance", "agilite", "dexterite", "perception", "mental", "intelligence", "sociabilite"];
-
-      // Écouter le temps réel
+    
+      // Écouter le temps réel pour ce joueur précis
       onSnapshot(persoRef, (doc) => {
           if (doc.exists()) {
               const data = doc.data();
               fields.forEach(field => {
                   const el = document.getElementById(field);
                   if (document.activeElement !== el) {
-                      el.value = data[field] || (field === "nomPerso" ? "" : 10);
+                      el.value = data[field] || (field === "nomPerso" ? joueurID : 10);
                   }
               });
-              document.getElementById("statut").innerText = "Synchro Temps Réel OK";
+              document.getElementById("statut").innerText = "Connecté en tant que " + joueurID;
           }
       });
-
-      // Sauvegarder automatiquement
+    
+      // Sauvegarde automatique
       const sauvegarder = () => {
           const stats = {};
           fields.forEach(field => {
@@ -96,7 +108,7 @@ const app = initializeApp(firebaseConfig);
           });
           setDoc(persoRef, stats, { merge: true });
       };
-
+    
       fields.forEach(field => {
           document.getElementById(field).addEventListener("input", sauvegarder);
       });
