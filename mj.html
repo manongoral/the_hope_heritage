@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Console MJ - The Hope Heritage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="content-section">
+        <h1>Tableau de Bord du MJ</h1>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Joueur</th>
+                        <th>PV</th>
+                        <th>FOR</th>
+                        <th>END</th>
+                        <th>AGI</th>
+                        <th>INT</th>
+                    </tr>
+                </thead>
+                <tbody id="table-mj">
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      // --- COLLE TON BLOC FirebaseConfig ICI ---
+      const firebaseConfig = {
+        apiKey: "TON_API_KEY",
+        // ... tes infos
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Écouter TOUS les personnages en même temps
+      onSnapshot(collection(db, "personnages"), (snapshot) => {
+          const tbody = document.getElementById("table-mj");
+          tbody.innerHTML = ""; // On vide pour mettre à jour
+
+          snapshot.forEach((doc) => {
+              const p = doc.data();
+              const row = `<tr>
+                  <td><strong>${doc.id}</strong></td>
+                  <td>${p.pvPerso || 0}</td>
+                  <td>${p.force || 0}</td>
+                  <td>${p.endurance || 0}</td>
+                  <td>${p.agilite || 0}</td>
+                  <td>${p.intelligence || 0}</td>
+              </tr>`;
+              tbody.innerHTML += row;
+          });
+      });
+    </script>
+</body>
+</html>
