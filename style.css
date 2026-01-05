@@ -103,3 +103,38 @@ main h1 {
     font-size: 2.5rem;
     text-transform: uppercase;
 }
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.stats-table th, .stats-table td {
+    border: 1px solid #d4af37;
+    padding: 12px;
+    text-align: left;
+    color: white;
+}
+
+.stats-table th {
+    background: #d4af37;
+    color: black;
+}
+
+.stats-table input {
+    background: transparent;
+    border: none;
+    color: #d4af37;
+    font-weight: bold;
+    width: 50px;
+    font-size: 1.1rem;
+}
+
+/* Enlever les flèches sur les inputs number pour le style */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
