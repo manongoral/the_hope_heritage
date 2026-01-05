@@ -17,36 +17,76 @@
     </nav>
 
     <main class="content-section">
-        <h1>Fiche de Personnage</h1>
-        
-        <div class="card">
-            <div style="margin-bottom: 20px;">
-                <label>Nom du Héros :</label>
-                <input type="text" id="nomPerso" placeholder="Ex: Valerius" style="width: 100%; padding: 10px;">
-            </div>
-
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        <th>Caractéristique</th>
-                        <th>Valeur</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Force</td><td><input type="number" id="force" value="10"></td></tr>
-                    <tr><td>Endurance</td><td><input type="number" id="endurance" value="10"></td></tr>
-                    <tr><td>Agilité</td><td><input type="number" id="agilite" value="10"></td></tr>
-                    <tr><td>Dextérité</td><td><input type="number" id="dexterite" value="10"></td></tr>
-                    <tr><td>Perception</td><td><input type="number" id="perception" value="10"></td></tr>
-                    <tr><td>Mental</td><td><input type="number" id="mental" value="10"></td></tr>
-                    <tr><td>Intelligence</td><td><input type="number" id="intelligence" value="10"></td></tr>
-                    <tr><td>Sociabilité</td><td><input type="number" id="sociabilite" value="10"></td></tr>
-                </tbody>
-            </table>
-            
-            <p id="statut" style="color: #d4af37; font-size: 0.8rem; margin-top: 15px; text-align: center;">Connexion au grimoire...</p>
+    <h1>Fiche de : <span id="displayID">...</span></h1>
+    
+    <div class="card">
+        <h2 class="section-title">État Civil</h2>
+        <div class="grid-container">
+            <div class="input-group"><label>Nom & Prénom</label><input type="text" id="nomComplet" class="save-field"></div>
+            <div class="input-group"><label>Âge</label><input type="number" id="age" class="save-field"></div>
+            <div class="input-group"><label>Faction</label><input type="text" id="faction" class="save-field"></div>
+            <div class="input-group"><label>Pouvoir</label><input type="text" id="pouvoir" class="save-field"></div>
+            <div class="input-group"><label>École de Combat</label><input type="text" id="ecoleCombat" class="save-field"></div>
+            <div class="input-group"><label>Religion</label><input type="text" id="religion" class="save-field"></div>
         </div>
-    </main>
+
+        <div class="grid-container">
+            <section>
+                <h2 class="section-title">Physique</h2>
+                <div class="input-group"><label>Taille / Poids</label><input type="text" id="physique_tp" class="save-field"></div>
+                <div class="input-group"><label>Yeux / Cheveux</label><input type="text" id="physique_yc" class="save-field"></div>
+                <div class="input-group"><label>Style Vestimentaire</label><textarea id="styleVest" class="save-field"></textarea></div>
+                <div class="input-group"><label>Traits Particuliers</label><textarea id="traitsPart" class="save-field"></textarea></div>
+            </section>
+            <section>
+                <h2 class="section-title">Psychologie & Liens</h2>
+                <div class="input-group"><label>Qualités</label><input type="text" id="qualites" class="save-field"></div>
+                <div class="input-group"><label>Défauts</label><input type="text" id="defauts" class="save-field"></div>
+                <div class="input-group"><label>Famille</label><textarea id="famille" class="save-field"></textarea></div>
+                <div class="input-group"><label>Amis / Alliés</label><textarea id="amis" class="save-field"></textarea></div>
+            </section>
+        </div>
+
+        <h2 class="section-title">Équipement de Combat</h2>
+        <div class="input-group">
+            <label>Arme principale portée</label>
+            <input type="text" id="armePortee" class="save-field" placeholder="Nom et bonus de l'arme...">
+        </div>
+
+        <h2 class="section-title">Capacités & Grimoire</h2>
+        
+        <h3>Compétences</h3>
+        <table class="dynamic-table"><tbody id="bodyCompetences"></tbody></table>
+        <button class="btn-add" onclick="addRow('bodyCompetences', 2)">+ Ajouter une compétence</button>
+
+        <h3>Talents</h3>
+        <table class="dynamic-table"><tbody id="bodyTalents"></tbody></table>
+        <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
+
+        <h3>Sorts</h3>
+        <table class="dynamic-table">
+            <thead><tr><th>Rang</th><th>Nom</th><th>Description</th><th></th></tr></thead>
+            <tbody id="bodySorts"></tbody>
+        </table>
+        <button class="btn-add" onclick="addRow('bodySorts', 3)">+ Ajouter un sort</button>
+
+        <h2 class="section-title">Inventaire</h2>
+        <div class="money-section">
+            <label><strong>Fortune (Noz) :</strong></label>
+            <input type="number" id="argentNoz" class="save-field" style="width: 120px;">
+        </div>
+        <table class="dynamic-table">
+            <thead><tr><th>Objet</th><th>Description</th><th>Qté</th><th></th></tr></thead>
+            <tbody id="bodyInventaire"></tbody>
+        </table>
+        <button class="btn-add" onclick="addRow('bodyInventaire', 3)">+ Ajouter un objet</button>
+
+        <h2 class="section-title">Histoire du Personnage</h2>
+        <textarea id="histoirePerso" class="save-field" style="min-height: 250px;"></textarea>
+
+        <p id="statut">Synchronisation...</p>
+    </div>
+</main>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
