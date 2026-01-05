@@ -91,9 +91,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
       import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-      // --- COLLE TON BLOC FirebaseConfig ICI ---
-      // Import the functions you need from the SDKs you need
+    
       const firebaseConfig = {
         apiKey: "AIzaSyAhl7MuvCy54F4Qt27mtlVAqmCu4Bg-KCE",
         authDomain: "the-hope-heritage.firebaseapp.com",
@@ -106,51 +104,94 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
     
-      // --- LOGIQUE MULTI-JOUEURS ---
-      // On récupère le nom du joueur dans l'URL (ex: ?id=Valerius)
       const urlParams = new URLSearchParams(window.location.search);
-      let joueurID = urlParams.get('id');
+      let joueurID = urlParams.get('id') || prompt("Entrez votre nom de personnage :");
+      if (!joueurID) joueurID = "Anonyme";
+      document.getElementById('displayID').innerText = joueurID;
     
-      // Si pas d'ID dans l'URL, on demande le nom
-      if (!joueurID) {
-          joueurID = prompt("Entrez votre nom de personnage pour charger votre fiche :");
-          if (!joueurID) joueurID = "Anonyme"; // Secours
-      }
-    
-      // On pointe vers le document spécifique de CE joueur
       const persoRef = doc(db, "personnages", joueurID);
+    
+      // --- FONCTIONS DES TABLEAUX (Correction ici) ---
       
-      // Afficher le nom du joueur sur la page
-      document.querySelector('h1').innerText = "Fiche de : " + joueurID;
-    
-      const fields = ["nomPerso", "force", "endurance", "agilite", "dexterite", "perception", "mental", "intelligence", "sociabilite"];
-    
-      // Écouter le temps réel pour ce joueur précis
-      onSnapshot(persoRef, (doc) => {
-          if (doc.exists()) {
-              const data = doc.data();
-              fields.forEach(field => {
-                  const el = document.getElementById(field);
-                  if (document.activeElement !== el) {
-                      el.value = data[field] || (field === "nomPerso" ? joueurID : 10);
-                  }
-              });
-              document.getElementById("statut").innerText = "Connecté en tant que " + joueurID;
-          }
-      });
-    
-      // Sauvegarde automatique
-      const sauvegarder = () => {
-          const stats = {};
-          fields.forEach(field => {
-              const val = document.getElementById(field).value;
-              stats[field] = field === "nomPerso" ? val : parseInt(val);
-          });
-          setDoc(persoRef, stats, { merge: true });
+      // On attache la fonction à "window" pour que le "onclick" du HTML la voie
+      window.addRow = function(tableId, cols) {
+        const body = document.getElementById(tableId);
+        const row = body.insertRow();
+        for (let i = 0; i < cols; i++) {
+          let cell = row.insertCell(i);
+          cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
+          // Sauvegarde auto quand on écrit dans la nouvelle ligne
+          cell.querySelector('input').addEventListener('input', window.sauvegarder);
+        }
+        let actionCell = row.insertCell(cols);
+        actionCell.innerHTML = `<button class="btn-remove" onclick="this.parentElement.parentElement.remove(); window.sauvegarder();">X</button>`;
       };
     
-      fields.forEach(field => {
-          document.getElementById(field).addEventListener("input", sauvegarder);
+      const getTableData = (tableBodyId) => {
+        const rows = document.getElementById(tableBodyId).rows;
+        return Array.from(rows).map(row => {
+          return Array.from(row.cells)
+            .slice(0, -1) // On ignore la cellule du bouton X
+            .map(cell => cell.querySelector('input').value);
+        });
+      };
+    
+      const setTableData = (tableBodyId, data, cols) => {
+        const body = document.getElementById(tableBodyId);
+        body.innerHTML = ""; 
+        if (!data) return;
+        data.forEach(rowData => {
+          const row = body.insertRow();
+          rowData.forEach((val, i) => {
+            let cell = row.insertCell(i);
+            cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
+            cell.querySelector('input').addEventListener('input', window.sauvegarder);
+          });
+          let actionCell = row.insertCell(rowData.length);
+          actionCell.innerHTML = `<button class="btn-remove" onclick="this.parentElement.parentElement.remove(); window.sauvegarder();">X</button>`;
+        });
+      };
+    
+      // --- SAUVEGARDE ---
+      window.sauvegarder = function() {
+        const data = {};
+        // Champs classiques
+        document.querySelectorAll('.save-field').forEach(el => {
+          data[el.id] = el.type === "number" ? parseInt(el.value) || 0 : el.value;
+        });
+        // Données des tableaux
+        data.compData = getTableData('bodyCompetences');
+        data.talentData = getTableData('bodyTalents');
+        data.sortData = getTableData('bodySorts');
+        data.invData = getTableData('bodyInventaire');
+    
+        setDoc(persoRef, data, { merge: true });
+      };
+    
+      // --- CHARGEMENT ---
+      onSnapshot(persoRef, (doc) => {
+        if (doc.exists()) {
+          const data = doc.data();
+          // On ne met à jour que si l'utilisateur n'est pas en train d'écrire
+          if (!document.activeElement.classList.contains('table-input') && 
+              !document.activeElement.classList.contains('save-field')) {
+            
+            document.querySelectorAll('.save-field').forEach(el => {
+              el.value = data[el.id] || (el.type === "number" ? 0 : "");
+            });
+    
+            setTableData('bodyCompetences', data.compData, 2);
+            setTableData('bodyTalents', data.talentData, 2);
+            setTableData('bodySorts', data.sortData, 3);
+            setTableData('bodyInventaire', data.invData, 3);
+          }
+          document.getElementById("statut").innerText = "Connecté : " + joueurID;
+        }
+      });
+    
+      // Écouteurs sur les champs fixes
+      document.querySelectorAll('.save-field').forEach(el => {
+        el.addEventListener('input', window.sauvegarder);
       });
     </script>
 </body>
