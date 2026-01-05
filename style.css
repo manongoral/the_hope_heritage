@@ -70,10 +70,11 @@ body {
 }
 
 .description {
-    max-width: 700px;
-    margin: 30px auto;
-    font-size: 1.2rem;
-    font-style: italic;
+    max-width: 1000px; /* Augmente la largeur du bloc de texte */
+    margin: 30px auto; /* Centre le bloc de texte */
+    font-size: 1.3rem; /* Grossit un peu la police pour le confort */
+    text-align: center; /* Centre le texte à l'intérieur du bloc */
+    padding: 0 5%;     /* Ajoute une petite marge sur les côtés pour les mobiles */
 }
 
 /* Sections */
