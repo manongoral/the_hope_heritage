@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche Personnage - The Hope Heritage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">The Hope Heritage</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="histoire.html">Histoire</a></li>
+            <li><a href="systeme.html">Système</a></li>
+            <li><a href="personnage.html">Ma Fiche</a></li>
+        </ul>
+    </nav>
+
+    <main class="content-section">
+        <h1>Fiche de Personnage</h1>
+        
+        <div class="card">
+            <div style="margin-bottom: 20px;">
+                <label>Nom du Héros :</label>
+                <input type="text" id="nomPerso" placeholder="Ex: Valerius" style="width: 100%; padding: 10px;">
+            </div>
+
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Caractéristique</th>
+                        <th>Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Force</td><td><input type="number" id="force" value="10"></td></tr>
+                    <tr><td>Endurance</td><td><input type="number" id="endurance" value="10"></td></tr>
+                    <tr><td>Agilité</td><td><input type="number" id="agilite" value="10"></td></tr>
+                    <tr><td>Dextérité</td><td><input type="number" id="dexterite" value="10"></td></tr>
+                    <tr><td>Perception</td><td><input type="number" id="perception" value="10"></td></tr>
+                    <tr><td>Mental</td><td><input type="number" id="mental" value="10"></td></tr>
+                    <tr><td>Intelligence</td><td><input type="number" id="intelligence" value="10"></td></tr>
+                    <tr><td>Sociabilité</td><td><input type="number" id="sociabilite" value="10"></td></tr>
+                </tbody>
+            </table>
+            
+            <p id="statut" style="color: #d4af37; font-size: 0.8rem; margin-top: 15px; text-align: center;">Connexion au grimoire...</p>
+        </div>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      // --- COLLE TON BLOC FirebaseConfig ICI ---
+      // Import the functions you need from the SDKs you need
+      const firebaseConfig = {
+        apiKey: "AIzaSyAhl7MuvCy54F4Qt27mtlVAqmCu4Bg-KCE",
+        authDomain: "the-hope-heritage.firebaseapp.com",
+        projectId: "the-hope-heritage",
+        storageBucket: "the-hope-heritage.firebasestorage.app",
+        messagingSenderId: "472185106488",
+        appId: "1:472185106488:web:496f37e901690987f536cd"
+      };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+      // -----------------------------------------
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const persoRef = doc(db, "personnages", "Joueur1");
+
+      const fields = ["nomPerso", "force", "endurance", "agilite", "dexterite", "perception", "mental", "intelligence", "sociabilite"];
+
+      // Écouter le temps réel
+      onSnapshot(persoRef, (doc) => {
+          if (doc.exists()) {
+              const data = doc.data();
+              fields.forEach(field => {
+                  const el = document.getElementById(field);
+                  if (document.activeElement !== el) {
+                      el.value = data[field] || (field === "nomPerso" ? "" : 10);
+                  }
+              });
+              document.getElementById("statut").innerText = "Synchro Temps Réel OK";
+          }
+      });
+
+      // Sauvegarder automatiquement
+      const sauvegarder = () => {
+          const stats = {};
+          fields.forEach(field => {
+              const val = document.getElementById(field).value;
+              stats[field] = field === "nomPerso" ? val : parseInt(val);
+          });
+          setDoc(persoRef, stats, { merge: true });
+      };
+
+      fields.forEach(field => {
+          document.getElementById(field).addEventListener("input", sauvegarder);
+      });
+    </script>
+</body>
+</html>
