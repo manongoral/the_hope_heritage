@@ -8,16 +8,20 @@
 <body>
     <main class="content-section">
         <h1>Tableau de Bord du MJ</h1>
-        <div class="card">
-            <table>
+        
+        <div class="card" style="overflow-x: auto;">
+            <table class="stats-table">
                 <thead>
                     <tr>
                         <th>Joueur</th>
-                        <th>PV</th>
                         <th>FOR</th>
                         <th>END</th>
                         <th>AGI</th>
+                        <th>DEX</th>
+                        <th>PER</th>
+                        <th>MEN</th>
                         <th>INT</th>
+                        <th>SOC</th>
                     </tr>
                 </thead>
                 <tbody id="table-mj">
@@ -29,30 +33,39 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
       import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-      // --- COLLE TON BLOC FirebaseConfig ICI ---
+    
+      // --- COLLE TON BLOC FirebaseConfig ICI (le même que d'habitude) ---
       const firebaseConfig = {
         apiKey: "TON_API_KEY",
-        // ... tes infos
+        authDomain: "...",
+        projectId: "...",
+        storageBucket: "...",
+        messagingSenderId: "...",
+        appId: "..."
       };
-
+    
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-
-      // Écouter TOUS les personnages en même temps
+    
+      // On écoute la collection "personnages"
       onSnapshot(collection(db, "personnages"), (snapshot) => {
           const tbody = document.getElementById("table-mj");
-          tbody.innerHTML = ""; // On vide pour mettre à jour
-
+          tbody.innerHTML = ""; 
+    
           snapshot.forEach((doc) => {
               const p = doc.data();
+              
+              // On crée une ligne pour chaque joueur avec TES caractéristiques exactes
               const row = `<tr>
-                  <td><strong>${doc.id}</strong></td>
-                  <td>${p.pvPerso || 0}</td>
+                  <td style="color: #d4af37; font-weight: bold;">${doc.id}</td>
                   <td>${p.force || 0}</td>
                   <td>${p.endurance || 0}</td>
                   <td>${p.agilite || 0}</td>
+                  <td>${p.dexterite || 0}</td>
+                  <td>${p.perception || 0}</td>
+                  <td>${p.mental || 0}</td>
                   <td>${p.intelligence || 0}</td>
+                  <td>${p.sociabilite || 0}</td>
               </tr>`;
               tbody.innerHTML += row;
           });
