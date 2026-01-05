@@ -104,40 +104,53 @@ main h1 {
     text-transform: uppercase;
 }
 
+/* Style harmonisé pour le tableau des caractéristiques */
 .stats-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-    table-layout: fixed; /* Force les colonnes à avoir la même largeur */
+    margin: 15px 0;
+    background: white;
+    table-layout: fixed; /* Force les colonnes égales pour tenir sur une ligne */
 }
 
 .stats-table th {
-    background: #2c3e50;
-    color: #d4af37;
-    padding: 10px 5px;
-    font-size: 0.8rem;
+    background: #f4f4f4; /* Même gris clair que les autres tableaux */
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 2px;
+    font-size: 0.75rem; /* Taille réduite pour éviter le débordement */
     text-transform: uppercase;
-    border: 1px solid #444;
+    font-weight: bold;
 }
 
 .stats-table td {
+    border: 1px solid #ddd;
     padding: 0;
-    border: 1px solid #ccc;
 }
 
-.stats-table input {
+.stats-table .stat-input {
     width: 100%;
     border: none;
-    padding: 15px 5px;
+    padding: 10px 0;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    background: #fff;
+    color: #2c3e50;
+    background: transparent;
+    appearance: textfield; /* Cache les flèches sur Chrome/Safari */
 }
 
-.stats-table input:focus {
-    background: #fdfaf0;
-    outline: none;
+/* Supprime les petites flèches sur Firefox */
+.stats-table .stat-input::-webkit-outer-spin-button,
+.stats-table .stat-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.stats-table .stat-input:focus {
+    background: #fffdf0;
+    outline: 2px solid #d4af37;
+    z-index: 1;
 }
 
 /* Enlever les flèches sur les inputs number pour le style */
