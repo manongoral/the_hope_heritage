@@ -48,33 +48,32 @@
         </div>
 
         <h2 class="section-title">Caractéristiques</h2>
-        <div style="overflow-x: auto;"> <table class="stats-table">
-                <thead>
-                    <tr>
-                        <th>Force</th>
-                        <th>Endurance</th>
-                        <th>Agilité</th>
-                        <th>Dextérité</th>
-                        <th>Perception</th>
-                        <th>Mental</th>
-                        <th>Intelligence</th>
-                        <th>Sociabilité</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="number" id="force" class="save-field" value="10"></td>
-                        <td><input type="number" id="endurance" class="save-field" value="10"></td>
-                        <td><input type="number" id="agilite" class="save-field" value="10"></td>
-                        <td><input type="number" id="dexterite" class="save-field" value="10"></td>
-                        <td><input type="number" id="perception" class="save-field" value="10"></td>
-                        <td><input type="number" id="mental" class="save-field" value="10"></td>
-                        <td><input type="number" id="intelligence" class="save-field" value="10"></td>
-                        <td><input type="number" id="sociabilite" class="save-field" value="10"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>For</th>
+                    <th>End</th>
+                    <th>Agi</th>
+                    <th>Dex</th>
+                    <th>Per</th>
+                    <th>Men</th>
+                    <th>Int</th>
+                    <th>Soc</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="number" id="force" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="endurance" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="agilite" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="dexterite" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="perception" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="mental" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="intelligence" class="save-field stat-input" value="10"></td>
+                    <td><input type="number" id="sociabilite" class="save-field stat-input" value="10"></td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2 class="section-title">Équipement de Combat</h2>
         <div class="input-group">
@@ -85,11 +84,15 @@
         <h2 class="section-title">Compétences, talents et sorts</h2>
         
         <h3>Compétences</h3>
-        <table class="dynamic-table"><tbody id="bodyCompetences"></tbody></table>
+        <table class="dynamic-table">
+            <thead><tr><th>Compétence</th><th>Description</th><th></th></tr></thead>
+            <tbody id="bodyCompetences"></tbody></table>
         <button class="btn-add" onclick="addRow('bodyCompetences', 2)">+ Ajouter une compétence</button>
 
         <h3>Talents</h3>
-        <table class="dynamic-table"><tbody id="bodyTalents"></tbody></table>
+        <table class="dynamic-table">
+            <thead><tr><th>Talent</th><th>Description</th><th></th></tr></thead>
+            <tbody id="bodyTalents"></tbody></table>
         <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
 
         <h3>Sorts</h3>
@@ -105,7 +108,7 @@
             <input type="number" id="argentNoz" class="save-field" style="width: 120px;">
         </div>
         <table class="dynamic-table">
-            <thead><tr><th>Objet</th><th>Description</th><th>Qté</th><th></th></tr></thead>
+            <thead><tr><th>Objet</th><th>Description</th><th>Quantité</th><th></th></tr></thead>
             <tbody id="bodyInventaire"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodyInventaire', 3)">+ Ajouter un objet</button>
