@@ -56,12 +56,17 @@ body {
     letter-spacing: 4px;
 }
 
+.image-container {
+    max-width: 800px; /* Limite la largeur de l'image */
+    margin: 0 auto;   /* Centre l'image horizontalement */
+    padding: 20px;
+}
+
 .main-img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;      /* L'image prend 100% de son conteneur (800px) */
+    height: auto;     /* Garde les bonnes proportions */
     border: 3px solid var(--primary);
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(193, 154, 107, 0.3);
 }
 
 .description {
