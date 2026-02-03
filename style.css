@@ -309,9 +309,9 @@ textarea {
 }
 
 /* Largeurs imposées */
-#skillTable th:nth-child(1), #skillTable td:nth-child(1) { width: 40%; font-weight: bold; color: var(--primary); }
-#skillTable th:nth-child(2), #skillTable td:nth-child(2) { width: 35%; }
-#skillTable th:nth-child(3), #skillTable td:nth-child(3) { width: 25%; font-size: 0.95rem; }
+#skillTable th:nth-child(1), #skillTable td:nth-child(1) { width: 25%; font-weight: bold; color: var(--primary); }
+#skillTable th:nth-child(2), #skillTable td:nth-child(2) { width: 25%; }
+#skillTable th:nth-child(3), #skillTable td:nth-child(3) { width: 50%; font-size: 0.95rem; }
 
 /* --- Conteneur des Badges --- */
 .tag-container {
