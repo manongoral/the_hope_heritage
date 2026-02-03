@@ -171,7 +171,12 @@
             const rows = Array.from(body.rows);
             return rows.map(row => {
                 const inputs = row.querySelectorAll('input.table-input');
-                return Array.from(inputs).map(input => input.value);
+                const rowObject = {};
+                // On crée des clés dynamiques : c0, c1, c2... pour chaque colonne
+                inputs.forEach((input, index) => {
+                    rowObject["c" + index] = input.value;
+                });
+                return rowObject; 
             });
         };
     
@@ -235,31 +240,33 @@
               });
         
               // Fonction interne de remplissage des tableaux
-              const fillTable = (id, tableData) => {
-                const body = document.getElementById(id);
-                if (!body) return; // Sécurité si l'ID est mal écrit
+                const fillTable = (id, tableData) => {
+                    const body = document.getElementById(id);
+                    if (!body) return;
+                    
+                    body.innerHTML = "";
+                    if (!tableData || !Array.isArray(tableData)) return;
                 
-                body.innerHTML = "";
-                if (!tableData || !Array.isArray(tableData)) return;
-        
-                tableData.forEach(rowData => {
-                  const row = body.insertRow();
-                  rowData.forEach(val => {
-                    let cell = row.insertCell();
-                    cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
-                    // Utilisation de window.sauvegarder explicitement
-                    cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
-                  });
-                  
-                  // Bouton supprimer
-                  let delCell = row.insertCell();
-                  delCell.innerHTML = `<button class="btn-remove">X</button>`;
-                  delCell.querySelector('button').onclick = () => { 
-                    row.remove(); 
-                    window.sauvegarder(); 
-                  };
-                });
-              };
+                    tableData.forEach(rowData => {
+                        const row = body.insertRow();
+                        
+                        // rowData est maintenant un objet {c0: "valeur", c1: "valeur"}
+                        // On boucle sur les propriétés de l'objet
+                        Object.values(rowData).forEach(val => {
+                            let cell = row.insertCell();
+                            cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
+                            cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
+                        });
+                        
+                        // Bouton supprimer
+                        let delCell = row.insertCell();
+                        delCell.innerHTML = `<button class="btn-remove">X</button>`;
+                        delCell.querySelector('button').onclick = () => { 
+                            row.remove(); 
+                            window.sauvegarder(); 
+                        };
+                    });
+                };
         
               // Exécution pour chaque tableau
               fillTable('bodyCompetences', data.compData);
