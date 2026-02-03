@@ -393,44 +393,46 @@ textarea {
     margin-bottom: 15px;
 }
 
-/* --- Style du titre déroulant --- */
-.summary-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px 0;
-}
+/* --- Sections Déroulantes --- */
 
-/* Cache la flèche moche par défaut du navigateur */
-summary {
+/* On cache la flèche native du navigateur sur tous les navigateurs */
+details summary {
     list-style: none !important;
-    outline: none;
 }
-summary::-webkit-details-marker {
+details summary::-webkit-details-marker {
     display: none !important;
 }
 
-/* Style de la flèche textuelle */
-.arrow-icon {
-    color: var(--primary);
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    margin-right: 15px;
+.collapsible-section summary {
+    cursor: pointer;
+    outline: none;
 }
 
-/* Animation : la flèche pointe vers la droite quand c'est fermé */
-.collapsible-section .arrow-icon {
-    transform: rotate(-90deg);
+/* Style du titre qui sert de bouton */
+.collapsible-section summary h2 {
+    transition: all 0.3s ease;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-/* La flèche pointe vers le bas quand c'est ouvert */
-.collapsible-section[open] .arrow-icon {
-    transform: rotate(0deg);
+/* Effet au survol : le titre s'éclaire et le bord doré s'épaissit */
+.collapsible-section summary h2:hover {
+    background: rgba(193, 154, 107, 0.1); /* Léger fond doré */
+    color: #fff; /* Texte plus blanc */
+    border-left: 8px solid var(--primary); /* La barre dorée s'élargit */
 }
 
-/* Effet au survol */
-.summary-header:hover .arrow-icon {
-    text-shadow: 0 0 10px var(--primary);
+/* Style quand la section est ouverte */
+.collapsible-section[open] summary h2 {
+    background: rgba(193, 154, 107, 0.15);
+    margin-bottom: 10px;
+}
+
+.collapsible-content {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
