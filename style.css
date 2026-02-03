@@ -290,84 +290,53 @@ textarea {
     border: 1px solid var(--primary);
 }
 
+/* --- Base du Tableau --- */
 #skillTable {
     width: 100% !important;
-    table-layout: fixed; /* Indispensable pour que les % soient respectés */
+    table-layout: fixed;
     border-collapse: collapse;
-    background-color: #2a2a2e; /* Fond sombre */
+    background-color: #2a2a2e;
     margin-top: 20px;
     border: 1px solid var(--primary);
 }
 
-/* 1. RÉGLAGE STRICT DES LARGEURS */
-#skillTable th:nth-child(1), #skillTable td:nth-child(1) { 
-    width: 40% !important; 
-}
-#skillTable th:nth-child(2), #skillTable td:nth-child(2) { 
-    width: 35% !important; 
-}
-#skillTable th:nth-child(3), #skillTable td:nth-child(3) { 
-    width: 25% !important; 
-}
-
-/* 2. ESPACEMENT ENTRE LES LIGNES */
-#skillTable td {
-    padding: 25px 15px; /* 25px en haut/bas crée l'espace entre les lignes */
-    border-bottom: 1px solid #444; /* Ligne de séparation discrète */
-    vertical-align: middle;
-    line-height: 1.5; /* Espace entre les lignes de texte elles-mêmes */
-    word-wrap: break-word; /* Sécurité pour les mots longs */
-}
-
-#skillTable th {
-    background-color: #000;
-    color: var(--primary);
+/* --- Alignement Vertical Parfait --- */
+#skillTable th, #skillTable td {
+    padding: 30px 20px;
+    vertical-align: middle; /* Aligne tout le monde au centre verticalement */
     text-align: left;
-    padding: 15px;
-    border-bottom: 2px solid var(--primary);
-    text-transform: uppercase;
-    font-size: 0.9rem;
+    border-bottom: 1px solid #3d3d42;
 }
 
-/* 3. AJUSTEMENT DU TEXTE ET DES TAGS */
-#skillTable td:first-child {
-    font-weight: bold;
-    color: var(--primary);
-    white-space: normal; /* Autorise le retour à la ligne pour respecter la largeur */
-}
+/* Largeurs imposées */
+#skillTable th:nth-child(1), #skillTable td:nth-child(1) { width: 40%; font-weight: bold; color: var(--primary); }
+#skillTable th:nth-child(2), #skillTable td:nth-child(2) { width: 35%; }
+#skillTable th:nth-child(3), #skillTable td:nth-child(3) { width: 25%; font-size: 0.95rem; }
 
-#skillTable td:nth-child(2) {
+/* --- Conteneur des Badges --- */
+.tag-container {
     display: flex;
-    flex-wrap: wrap; /* Les badges passent à la ligne s'il n'y a pas assez de place */
-    gap: 8px;        /* Espace entre les deux badges */
-    justify-content: flex-start;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center; /* Aligne les badges entre eux */
 }
 
+/* --- Palette Pastel (Assure-toi que ces noms correspondent à ton HTML) --- */
 .tag {
     display: inline-block;
     padding: 6px 12px;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
-    color: white;
     text-transform: uppercase;
-    text-align: center;
-    min-width: 0; /* On retire toute contrainte de largeur minimale */
-    max-width: 100%;
+    color: white;
 }
 
-/* Effet de survol pour la lisibilité */
-#skillTable tr:hover {
-    background-color: #323236;
-}
-
-/* Ta palette Pastel personnalisée */
-.force { background-color: #f1948a; color: #fff; }        /* Rouge Corail */
-.endurance { background-color: #f8c471; color: #fff; }    /* Orange Pêche */
-.agilite { background-color: #f191c2; color: #fff; }      /* Rose Poudré */
-.dexterite { background-color: #f7dc6f; color: #5d4037; } /* Jaune Sablé */
-.mental { background-color: #bb8fce; color: #fff; }       /* Violet Lavande */
-.intelligence { background-color: #aeb6bf; color: #fff; } /* Gris Galet */
-.perception { background-color: #82e0aa; color: #1e8449; } /* Vert Menthe */
-.sociabilite { background-color: #85c1e9; color: #fff; }  /* Bleu Ciel */
+.agilite { background-color: #f191c2; }      /* Rose */
+.force { background-color: #f1948a; }        /* Rouge */
+.endurance { background-color: #f8c471; }    /* Orange */
+.dexterite { background-color: #f7dc6f; color: #5d4037; } /* Jaune */
+.mental { background-color: #bb8fce; }       /* Violet */
+.intelligence { background-color: #aeb6bf; } /* Gris */
+.perception { background-color: #82e0aa; color: #1e8449; } /* Vert */
+.sociabilite { background-color: #85c1e9; }  /* Bleu */
