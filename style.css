@@ -447,3 +447,51 @@ textarea {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Cache la flèche par défaut sur tous les navigateurs */
+summary {
+    list-style: none !important;
+}
+summary::-webkit-details-marker {
+    display: none !important;
+}
+
+/* Container du titre et de la flèche */
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    padding-right: 10px;
+}
+
+.summary-header h2 {
+    margin: 0; /* Enlève les marges qui pourraient décaler la flèche */
+}
+
+/* La flèche personnalisée */
+.arrow {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.arrow::after {
+    content: '▶'; /* On commence par une flèche vers la droite */
+    display: block;
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Quand la section est OUVERTE */
+details[open] .arrow::after {
+    transform: rotate(90deg); /* Elle tourne vers le bas */
+}
+
+/* Optionnel : un petit effet au survol du titre entier */
+.summary-header:hover h2 {
+    color: var(--primary);
+}
