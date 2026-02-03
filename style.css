@@ -349,39 +349,37 @@ textarea {
 
 /* --- Section Caractéristiques --- */
 .charac-grid {
-    display: flex;
-    flex-direction: column; /* Force l'alignement vertical (l'un en dessous de l'autre) */
-    gap: 10px;              /* Espacement entre chaque ligne */
-    margin-top: 20px;
-    max-width: 800px;       /* Optionnel : évite que la ligne soit trop longue sur grand écran */
+    display: flex !important;
+    flex-direction: column !important; /* Force l'un en dessous de l'autre */
+    gap: 10px !important;
+    margin: 20px 0 !important;
+    max-width: 900px;
 }
 
 .charac-item {
-    display: flex;
-    align-items: center;
-    background: #2a2a2e;
-    padding: 10px 15px;
-    border-left: 3px solid var(--primary);
-    border-radius: 4px;
+    display: flex !important;
+    flex-direction: row !important; /* Force le badge et le texte sur la même ligne */
+    align-items: center !important;
+    background: #2a2a2e !important; /* Fond sombre pour coller au thème */
+    padding: 10px 15px !important;
+    border-left: 3px solid var(--primary) !important;
+    border-radius: 4px !important;
 }
 
+/* On cible spécifiquement le texte à côté du badge */
 .charac-desc {
-    margin-left: 10px;
-    color: #ccc;
-    font-size: 0.95rem;
+    margin-left: 10px !important;
+    color: #e0e0e0 !important;
+    font-size: 0.95rem !important;
+    margin-top: 0 !important; /* Annule tout héritage de <p> */
 }
 
-/* On fixe la largeur des badges pour que tous les ":" soient alignés verticalement */
+/* Largeur fixe des badges pour un alignement parfait des ":" */
 .charac-item .tag {
-    width: 110px; 
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.charac-item p {
-    margin: 10px 0 0 0;
-    font-size: 0.95rem;
-    color: #ccc;
+    width: 120px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    display: inline-block !important;
 }
 
 .separator {
