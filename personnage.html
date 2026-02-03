@@ -164,11 +164,15 @@
         });
     
         // Sauvegarde des tableaux dynamiques
-        const getTableData = (id) => {
-          const rows = document.getElementById(id).rows;
-          return Array.from(rows).map(row => 
-            Array.from(row.querySelectorAll('input.table-input')).map(i => i.value)
-          );
+        const getTableData = (tableBodyId) => {
+            const body = document.getElementById(tableBodyId);
+            if (!body) return [];
+            
+            const rows = Array.from(body.rows);
+            return rows.map(row => {
+                const inputs = row.querySelectorAll('input.table-input');
+                return Array.from(inputs).map(input => input.value);
+            });
         };
     
         data.compData = getTableData('bodyCompetences');
@@ -191,61 +195,87 @@
       // --- GESTION DES LIGNES ---
       window.addRow = function(tableId, cols) {
         const body = document.getElementById(tableId);
+        if (!body) return;
+    
         const row = body.insertRow();
         for (let i = 0; i < cols; i++) {
-          let cell = row.insertCell(i);
-          cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
-          // On attache l'écouteur directement à la création
-          cell.querySelector('input').addEventListener('input', window.sauvegarder);
+            let cell = row.insertCell(i);
+            cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
+            
+            // CRUCIAL : On dit à l'input de sauvegarder dès qu'on tape dedans
+            cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
         }
+    
+        // Bouton de suppression
         let actionCell = row.insertCell(cols);
         actionCell.innerHTML = `<button class="btn-remove">X</button>`;
         actionCell.querySelector('button').onclick = function() {
-          row.remove();
-          window.sauvegarder();
+            row.remove();
+            window.sauvegarder(); // On sauvegarde aussi après une suppression
         };
-      };
+    };
     
       // --- CHARGEMENT ET MISE À JOUR ---
-      onSnapshot(persoRef, (docSnap) => {
-        if (docSnap.exists() && !document.activeElement.classList.contains('table-input') && !document.activeElement.classList.contains('save-field')) {
-          const data = docSnap.data();
-          
-          // Remplissage champs fixes
-          document.querySelectorAll('.save-field').forEach(el => {
-            if (data[el.id] !== undefined) el.value = data[el.id];
-          });
-    
-          // Remplissage tableaux
-          const fillTable = (id, tableData) => {
-            const body = document.getElementById(id);
-            body.innerHTML = "";
-            if (!tableData) return;
-            tableData.forEach(rowData => {
-              const row = body.insertRow();
-              rowData.forEach(val => {
-                let cell = row.insertCell();
-                cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
-                cell.querySelector('input').addEventListener('input', window.sauvegarder);
+        onSnapshot(persoRef, (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            
+            // On ne met à jour les champs QUE si l'utilisateur n'est pas en train d'écrire
+            // pour éviter que le curseur ne saute ou que le texte ne disparaisse
+            const isTyping = document.activeElement.classList.contains('table-input') || 
+                             document.activeElement.classList.contains('save-field') ||
+                             document.activeElement.tagName === "TEXTAREA";
+        
+            if (!isTyping) {
+              console.log("Mise à jour des données reçue...");
+        
+              // Remplissage champs fixes
+              document.querySelectorAll('.save-field').forEach(el => {
+                if (data[el.id] !== undefined) el.value = data[el.id];
               });
-              let delCell = row.insertCell();
-              delCell.innerHTML = `<button class="btn-remove">X</button>`;
-              delCell.querySelector('button').onclick = () => { row.remove(); window.sauvegarder(); };
-            });
-          };
-    
-          fillTable('bodyCompetences', data.compData);
-          fillTable('bodyTalents', data.talentData);
-          fillTable('bodySorts', data.sortData);
-          fillTable('bodyInventaire', data.invData);
-        }
-        document.getElementById("statut").innerText = "Connecté : " + joueurID;
-      });
-    
-      // Écouteurs initiaux sur les champs déjà présents
-      document.querySelectorAll('.save-field').forEach(el => {
-        el.addEventListener('input', window.sauvegarder);
-      });
+        
+              // Fonction interne de remplissage des tableaux
+              const fillTable = (id, tableData) => {
+                const body = document.getElementById(id);
+                if (!body) return; // Sécurité si l'ID est mal écrit
+                
+                body.innerHTML = "";
+                if (!tableData || !Array.isArray(tableData)) return;
+        
+                tableData.forEach(rowData => {
+                  const row = body.insertRow();
+                  rowData.forEach(val => {
+                    let cell = row.insertCell();
+                    cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
+                    // Utilisation de window.sauvegarder explicitement
+                    cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
+                  });
+                  
+                  // Bouton supprimer
+                  let delCell = row.insertCell();
+                  delCell.innerHTML = `<button class="btn-remove">X</button>`;
+                  delCell.querySelector('button').onclick = () => { 
+                    row.remove(); 
+                    window.sauvegarder(); 
+                  };
+                });
+              };
+        
+              // Exécution pour chaque tableau
+              fillTable('bodyCompetences', data.compData);
+              fillTable('bodyTalents', data.talentData);
+              fillTable('bodySorts', data.sortData);
+              fillTable('bodyInventaire', data.invData);
+            }
+            
+            document.getElementById("statut").innerText = "Connecté : " + joueurID;
+          }
+        });
+        
+        // Écouteurs initiaux sur les champs statiques (Nom, Age, etc.)
+        document.querySelectorAll('.save-field').forEach(el => {
+          el.addEventListener(''input', () => window.sauvegarder());
+        });
     
     </script>
 </body>
