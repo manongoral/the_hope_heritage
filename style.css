@@ -393,105 +393,44 @@ textarea {
     margin-bottom: 15px;
 }
 
-/* --- Sections Déroulantes --- */
-.collapsible-section {
-    margin-bottom: 20px;
-    background: transparent;
-}
-
-/* Cache la petite flèche moche par défaut du navigateur */
-.collapsible-section summary {
-    list-style: none;
-    cursor: pointer;
-    outline: none;
-}
-.collapsible-section summary::-webkit-details-marker {
-    display: none;
-}
-
-/* On réutilise ton style de H2 pour le bouton summary */
-.collapsible-section summary h2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(193, 154, 107, 0.05); /* Un léger fond doré au survol */
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.collapsible-section summary h2:hover {
-    background: rgba(193, 154, 107, 0.15);
-}
-
-/* Création de la flèche personnalisée */
-.arrow::after {
-    content: '▼';
-    font-size: 0.8rem;
-    color: var(--primary);
-    transition: transform 0.3s ease;
-}
-
-/* Rotation de la flèche quand c'est ouvert */
-.collapsible-section[open] .arrow::after {
-    transform: rotate(180deg);
-}
-
-/* Espacement du contenu intérieur */
-.collapsible-content {
-    padding: 20px 0;
-    animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Cache la flèche par défaut sur tous les navigateurs */
-summary {
-    list-style: none !important;
-}
-summary::-webkit-details-marker {
-    display: none !important;
-}
-
-/* Container du titre et de la flèche */
+/* --- Style du titre déroulant --- */
 .summary-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border-bottom: 1px solid #333;
-    padding-right: 10px;
+    padding: 10px 0;
 }
 
-.summary-header h2 {
-    margin: 0; /* Enlève les marges qui pourraient décaler la flèche */
+/* Cache la flèche moche par défaut du navigateur */
+summary {
+    list-style: none !important;
+    outline: none;
+}
+summary::-webkit-details-marker {
+    display: none !important;
 }
 
-/* La flèche personnalisée */
-.arrow {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    position: relative;
-}
-
-.arrow::after {
-    content: '▶'; /* On commence par une flèche vers la droite */
-    display: block;
+/* Style de la flèche textuelle */
+.arrow-icon {
     color: var(--primary);
     font-size: 1.2rem;
     transition: transform 0.3s ease;
+    display: inline-block;
+    margin-right: 15px;
 }
 
-/* Quand la section est OUVERTE */
-details[open] .arrow::after {
-    transform: rotate(90deg); /* Elle tourne vers le bas */
+/* Animation : la flèche pointe vers la droite quand c'est fermé */
+.collapsible-section .arrow-icon {
+    transform: rotate(-90deg);
 }
 
-/* Optionnel : un petit effet au survol du titre entier */
-.summary-header:hover h2 {
-    color: var(--primary);
+/* La flèche pointe vers le bas quand c'est ouvert */
+.collapsible-section[open] .arrow-icon {
+    transform: rotate(0deg);
+}
+
+/* Effet au survol */
+.summary-header:hover .arrow-icon {
+    text-shadow: 0 0 10px var(--primary);
 }
