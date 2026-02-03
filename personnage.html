@@ -134,11 +134,22 @@
       const db = getFirestore(app);
     
       const urlParams = new URLSearchParams(window.location.search);
-      let joueurID = urlParams.get('id') || prompt("Entrez votre nom de personnage :");
-      if (!joueurID) joueurID = "Anonyme";
-      document.getElementById('displayID').innerText = joueurID;
-    
-      const persoRef = doc(db, "personnages", joueurID);
+        let joueurID = urlParams.get('id');
+        
+        // Si pas d'ID dans l'URL, on demande un nom
+        if (!joueurID) {
+            joueurID = prompt("Entrez votre nom de personnage :");
+        }
+        
+        // Si l'utilisateur a cliqué sur "Annuler" ou n'a rien mis
+        if (!joueurID || joueurID.trim() === "") {
+            joueurID = "Anonyme_" + Math.floor(Math.random() * 1000);
+        }
+        
+        // On l'affiche immédiatement sur la page
+        document.getElementById('displayID').innerText = joueurID;
+        
+        const persoRef = doc(db, "personnages", joueurID);
     
       // --- FONCTION SAUVEGARDE (DÉFINIE EN PREMIER) ---
       window.sauvegarder = function() {
