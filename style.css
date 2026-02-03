@@ -300,8 +300,8 @@ textarea {
 
 /* RÉGLAGE DES LARGEURS */
 #skillTable th:nth-child(1) { width: 25%; } /* Compétence très large */
-#skillTable th:nth-child(2) { width: 30%; } /* Caractéristique très large */
-#skillTable th:nth-child(3) { width: 45%; } /* Description plus étroite */
+#skillTable th:nth-child(2) { width: 25%; } /* Caractéristique très large */
+#skillTable th:nth-child(3) { width: 50%; } /* Description plus étroite */
 
 #skillTable th {
     background-color: #000;
