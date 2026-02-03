@@ -70,88 +70,96 @@
         </details>
     
         <hr class="separator">
-    
-        <section class="skills-section">
-            <h2>Compétences</h2>
-            <p>
-                Écrivez ici votre texte explicatif sur les compétences (comment elles sont calculées, comment on les utilise avec les dés, etc.).
-            </p>
 
-            <div class="search-container">
-                <input type="text" id="skillSearch" onkeyup="filterSkills()" placeholder="Rechercher une compétence (ex: Acrobatie, Force, Perception...)">
+        <details class="collapsible-section" open>
+            <summary>
+                <div class="summary-header">
+                    <h2>Compétences</h2>
+                </div>
+            </summary>
+
+            <div class="collapsible-content">
+            
+                <p>
+                    Écrivez ici votre texte explicatif sur les compétences (comment elles sont calculées, comment on les utilise avec les dés, etc.).
+                </p>
+    
+                <div class="search-container">
+                    <input type="text" id="skillSearch" onkeyup="filterSkills()" placeholder="Rechercher une compétence (ex: Acrobatie, Force, Perception...)">
+                </div>
+            
+                <div class="table-wrapper">
+                    <table id="skillTable">
+                        <thead>
+                            <tr>
+                                <th>Compétence</th>
+                                <th>Caractéristique</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Acrobatie</td><td><span class="tag agilite">Agilité</span></td><td>Réaliser des mouvements nécessitant une certaine souplesse (sauts et autres cabrioles)</td></tr>
+                            <tr><td>Ancrage</td><td><span class="tag force">Force</span></td><td>Rester stable sur ses appuis, résister à une poussée</td></tr>
+                            <tr><td>Apnée</td><td><span class="tag endurance">Endurance</span></td><td>Retenir son souffle pendant une longue durée</td></tr>
+                            <tr><td>Artisanat</td><td><span class="tag dexterite">Dextérité</span><span class="tag intelligence">Intelligence</span></td><td>Créer ou concevoir des objets d’un certain type (cuisine, forge, joaillerie, mécanique, pièges, poisons, soins, tannerie…)</td></tr>
+                            <tr><td>Calme</td><td><span class="tag mental">Mental</span></td><td>Garder son calme face à une situation stressante ou déstabilisante</td></tr>
+                            <tr><td>Charisme</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Avoir une aura en société, un charme naturel facilitant les interactions pour convaincre ou commander</td></tr>
+                            <tr><td>Combat à mains nues</td><td><span class="tag force">Force</span></td><td>Se battre sans arme, en utilisant sa force brute</td></tr>
+                            <tr><td>Concentration</td><td><span class="tag mental">Mental</span></td><td>Réaliser des actions nécessitant une grande concentration, faire abstraction des éléments parasites</td></tr>
+                            <tr><td>Connaissances</td><td><span class="tag intelligence">Intelligence</span></td><td>Posséder des connaissances concernant un sujet précis (anatomie, nature, magie, machines et mécanismes...)</td></tr>
+                            <tr><td>Contorsion</td><td><span class="tag agilite">Agilité</span></td><td>Se dégager de ses liens ou de la prise d'un ennemi, se faufiler dans un espace étroit</td></tr>
+                            <tr><td>Contrefaçon</td><td><span class="tag dexterite">Dextérité</span></td><td>Reproduire avec fidélité ou modifier de manière crédible un objet existant ou une écriture</td></tr>
+                            <tr><td>Crochetage</td><td><span class="tag dexterite">Dextérité</span></td><td>Crocheter des serrures, ouvrir des portes closes</td></tr>
+                            <tr><td>Course</td><td><span class="tag endurance">Endurance</span></td><td>Courir pendant une longue durée</td></tr>
+                            <tr><td>Diplomatie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Gérer les situations de conflit, rechercher un terrain d’entente</td></tr>
+                            <tr><td>Discrétion</td><td><span class="tag agilite">Agilité</span></td><td>Se déplacer silencieusement ou se cacher de quelqu’un</td></tr>
+                            <tr><td>Enquête</td><td><span class="tag intelligence">Intelligence</span></td><td>Investiguer et récolter des informations</td></tr>
+                            <tr><td>Equilibre</td><td><span class="tag agilite">Agilité</span></td><td>Se maintenir ou progresser sur un socle instable</td></tr>
+                            <tr><td>Escalade</td><td><span class="tag force">Force</span></td><td>Gravir ou descendre une surface abrupte</td></tr>
+                            <tr><td>Escamotage</td><td><span class="tag dexterite">Dextérité</span></td><td>Réaliser des tours de passe-passe avec ses mains</td></tr>
+                            <tr><td>Esquive</td><td><span class="tag agilite">Agilité</span></td><td>Eviter les attaques ennemies</td></tr>
+                            <tr><td>Etanchéité mentale</td><td><span class="tag mental">Mental</span></td><td>Résister aux attaques et intrusions mentales</td></tr>
+                            <tr><td>Etiquette</td><td><span class="tag sociabilite">Sociabilité</span></td><td>S’adapter aux us et coutumes d’un groupe</td></tr>
+                            <tr><td>Expression artistique</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Se représenter en public ou réaliser une œuvre d’art d'un certain type (dessin, danse, musique, peinture, sculpture...)</td></tr>
+                            <tr><td>Filature</td><td><span class="tag agilite">Agilité</span><span class="tag perception">Perception</span></td><td>Suivre quelqu’un à la trace sans se faire repérer</td></tr>
+                            <tr><td>Fouille</td><td><span class="tag perception">Perception</span></td><td>Rechercher et trouver des objets</td></tr>
+                            <tr><td>Immobilisation</td><td><span class="tag force">Force</span></td><td>Empêcher le mouvement d’un objet ou d’une personne</td></tr>
+                            <tr><td>Immunité intox.</td><td><span class="tag endurance">Endurance</span></td><td>Ralentir les effets d’un poison ou supporter la nourriture mal cuisinée ou avariée</td></tr>
+                            <tr><td>Intimidation</td><td><span class="tag sociabilite">Sociabilité</span><span class="tag force">Force</span></td><td>Impressionner quelqu’un par son discours ou sa force physique pour obtenir quelque chose</td></tr>
+                            <tr><td>Intuition</td><td><span class="tag perception">Perception</span></td><td>Pressentir certains événements ou dangers</td></tr>
+                            <tr><td>Logique</td><td><span class="tag intelligence">Intelligence</span></td><td>Résoudre des problèmes complexes et des énigmes, analyser des objets et comprendre le fonctionnement d’un système</td></tr>
+                            <tr><td>Maîtrise magique</td><td><span class="tag mental">Mental</span></td><td>Contrôler un aspect de son pouvoir avec habileté (sorts offensifs, défensifs, soin...)</td></tr>
+                            <tr><td>Maniement d'arme</td><td><span class="tag dexterite">Dextérité</span><span class="tag force">Force</span></td><td>Manier une arme spécifique avec habileté (arc, épée...)</td></tr>
+                            <tr><td>Natation</td><td><span class="tag agilite">Agilité</span></td><td>Nager dans des conditions difficiles</td></tr>
+                            <tr><td>Négociation</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Trouver des arrangements et des compromis avec autrui</td></tr>
+                            <tr><td>Orientation</td><td><span class="tag perception">Perception</span></td><td>Se repérer dans un endroit inconnu ou peu connu</td></tr>
+                            <tr><td>Parade</td><td><span class="tag dexterite">Dextérité</span><span class="tag force">Force</span></td><td>Bloquer une attaque ennemie grâce à son arme ou un objet</td></tr>
+                            <tr><td>Perception magique</td><td><span class="tag perception">Perception</span></td><td>Détecter la présence de magie dans un lieu, un objet ou une personne</td></tr>
+                            <tr><td>Pistage</td><td><span class="tag perception">Perception</span></td><td>Suivre les traces d’une personne ou d’un animal</td></tr>
+                            <tr><td>Port de charges</td><td><span class="tag endurance">Endurance</span></td><td>Transporter avec soi des charges lourdes sur de longs trajets</td></tr>
+                            <tr><td>Précision</td><td><span class="tag dexterite">Dextérité</span></td><td>Réaliser des opérations minutieuses, toucher un point précis</td></tr>
+                            <tr><td>Premiers secours</td><td><span class="tag intelligence">Intelligence</span></td><td>Apporter des soins de base en attente de soins plus avancés</td></tr>
+                            <tr><td>Psychologie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Déceler les intentions d’autrui, détecter les mensonges</td></tr>
+                            <tr><td>Régulation thermique</td><td><span class="tag endurance">Endurance</span></td><td>Supporter les environnements avec des conditions thermiques extrêmes</td></tr>
+                            <tr><td>Résistance douleur</td><td><span class="tag endurance">Endurance</span></td><td>Encaisser les coups, ne pas s’effondrer face à la douleur</td></tr>
+                            <tr><td>Résistance sommeil</td><td><span class="tag endurance">Endurance</span></td><td>Rester éveillé pendant de longues périodes sans somnoler</td></tr>
+                            <tr><td>Riposte</td><td><span class="tag force">Force</span><span class="tag agilite">Agilité</span></td><td>Utiliser la force de l’adversaire contre lui pour contre-attaquer</td></tr>
+                            <tr><td>Sens surdéveloppé</td><td><span class="tag perception">Perception</span></td><td>Posséder un sens (vue, ouïe, odorat, goût, toucher) plus développé que la normale</td></tr>
+                            <tr><td>Soins avancés</td><td><span class="tag intelligence">Intelligence</span></td><td>Dispenser des soins complexes à quelqu'un pour soigner des blessures graves</td></tr>
+                            <tr><td>Surcharge</td><td><span class="tag mental">Mental</span></td><td>Outrepasser sa fatigue au prix d’une retombée physique après la période de surcharge</td></tr>
+                            <tr><td>Survie</td><td><span class="tag intelligence">Intelligence</span></td><td>Connaiître les rudiments de la survie (faire un feu, un abri, etc.)</td></tr>
+                            <tr><td>Tactique</td><td><span class="tag intelligence">Intelligence</span></td><td>Planifier des actions, élaborer et mettre en place des stratégies</td></tr>
+                            <tr><td>Transfert magique</td><td><span class="tag mental">Mental</span></td><td>Insuffler son pouvoir vers un élément extérieur</td></tr>
+                            <tr><td>Tromperie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Duper quelqu’un</td></tr>
+                            <tr><td>Vigilance</td><td><span class="tag perception">Perception</span></td><td>Rester sur ses gardes, repérer des menaces potentielles</td></tr>
+                            <tr><td>Vigueur</td><td><span class="tag endurance">Endurance</span></td><td>Maintenir un effort en situation de combat</td></tr>
+                            <tr><td>Vol à la tire</td><td><span class="tag dexterite">Dextérité</span></td><td>Faire les poches des passants</td></tr>
+                            <tr><td>Volonté</td><td><span class="tag mental">Mental</span></td><td>Persévérer lors de situations mentalement éprouvantes</td></tr>
+                        </tbody>
+                     </table>
+                </div>
             </div>
-        
-            <div class="table-wrapper">
-                <table id="skillTable">
-                    <thead>
-                        <tr>
-                            <th>Compétence</th>
-                            <th>Caractéristique</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Acrobatie</td><td><span class="tag agilite">Agilité</span></td><td>Réaliser des mouvements nécessitant une certaine souplesse (sauts et autres cabrioles)</td></tr>
-                        <tr><td>Ancrage</td><td><span class="tag force">Force</span></td><td>Rester stable sur ses appuis, résister à une poussée</td></tr>
-                        <tr><td>Apnée</td><td><span class="tag endurance">Endurance</span></td><td>Retenir son souffle pendant une longue durée</td></tr>
-                        <tr><td>Artisanat</td><td><span class="tag dexterite">Dextérité</span><span class="tag intelligence">Intelligence</span></td><td>Créer ou concevoir des objets d’un certain type (cuisine, forge, joaillerie, mécanique, pièges, poisons, soins, tannerie…)</td></tr>
-                        <tr><td>Calme</td><td><span class="tag mental">Mental</span></td><td>Garder son calme face à une situation stressante ou déstabilisante</td></tr>
-                        <tr><td>Charisme</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Avoir une aura en société, un charme naturel facilitant les interactions pour convaincre ou commander</td></tr>
-                        <tr><td>Combat à mains nues</td><td><span class="tag force">Force</span></td><td>Se battre sans arme, en utilisant sa force brute</td></tr>
-                        <tr><td>Concentration</td><td><span class="tag mental">Mental</span></td><td>Réaliser des actions nécessitant une grande concentration, faire abstraction des éléments parasites</td></tr>
-                        <tr><td>Connaissances</td><td><span class="tag intelligence">Intelligence</span></td><td>Posséder des connaissances concernant un sujet précis (anatomie, nature, magie, machines et mécanismes...)</td></tr>
-                        <tr><td>Contorsion</td><td><span class="tag agilite">Agilité</span></td><td>Se dégager de ses liens ou de la prise d'un ennemi, se faufiler dans un espace étroit</td></tr>
-                        <tr><td>Contrefaçon</td><td><span class="tag dexterite">Dextérité</span></td><td>Reproduire avec fidélité ou modifier de manière crédible un objet existant ou une écriture</td></tr>
-                        <tr><td>Crochetage</td><td><span class="tag dexterite">Dextérité</span></td><td>Crocheter des serrures, ouvrir des portes closes</td></tr>
-                        <tr><td>Course</td><td><span class="tag endurance">Endurance</span></td><td>Courir pendant une longue durée</td></tr>
-                        <tr><td>Diplomatie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Gérer les situations de conflit, rechercher un terrain d’entente</td></tr>
-                        <tr><td>Discrétion</td><td><span class="tag agilite">Agilité</span></td><td>Se déplacer silencieusement ou se cacher de quelqu’un</td></tr>
-                        <tr><td>Enquête</td><td><span class="tag intelligence">Intelligence</span></td><td>Investiguer et récolter des informations</td></tr>
-                        <tr><td>Equilibre</td><td><span class="tag agilite">Agilité</span></td><td>Se maintenir ou progresser sur un socle instable</td></tr>
-                        <tr><td>Escalade</td><td><span class="tag force">Force</span></td><td>Gravir ou descendre une surface abrupte</td></tr>
-                        <tr><td>Escamotage</td><td><span class="tag dexterite">Dextérité</span></td><td>Réaliser des tours de passe-passe avec ses mains</td></tr>
-                        <tr><td>Esquive</td><td><span class="tag agilite">Agilité</span></td><td>Eviter les attaques ennemies</td></tr>
-                        <tr><td>Etanchéité mentale</td><td><span class="tag mental">Mental</span></td><td>Résister aux attaques et intrusions mentales</td></tr>
-                        <tr><td>Etiquette</td><td><span class="tag sociabilite">Sociabilité</span></td><td>S’adapter aux us et coutumes d’un groupe</td></tr>
-                        <tr><td>Expression artistique</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Se représenter en public ou réaliser une œuvre d’art d'un certain type (dessin, danse, musique, peinture, sculpture...)</td></tr>
-                        <tr><td>Filature</td><td><span class="tag agilite">Agilité</span><span class="tag perception">Perception</span></td><td>Suivre quelqu’un à la trace sans se faire repérer</td></tr>
-                        <tr><td>Fouille</td><td><span class="tag perception">Perception</span></td><td>Rechercher et trouver des objets</td></tr>
-                        <tr><td>Immobilisation</td><td><span class="tag force">Force</span></td><td>Empêcher le mouvement d’un objet ou d’une personne</td></tr>
-                        <tr><td>Immunité intox.</td><td><span class="tag endurance">Endurance</span></td><td>Ralentir les effets d’un poison ou supporter la nourriture mal cuisinée ou avariée</td></tr>
-                        <tr><td>Intimidation</td><td><span class="tag sociabilite">Sociabilité</span><span class="tag force">Force</span></td><td>Impressionner quelqu’un par son discours ou sa force physique pour obtenir quelque chose</td></tr>
-                        <tr><td>Intuition</td><td><span class="tag perception">Perception</span></td><td>Pressentir certains événements ou dangers</td></tr>
-                        <tr><td>Logique</td><td><span class="tag intelligence">Intelligence</span></td><td>Résoudre des problèmes complexes et des énigmes, analyser des objets et comprendre le fonctionnement d’un système</td></tr>
-                        <tr><td>Maîtrise magique</td><td><span class="tag mental">Mental</span></td><td>Contrôler un aspect de son pouvoir avec habileté (sorts offensifs, défensifs, soin...)</td></tr>
-                        <tr><td>Maniement d'arme</td><td><span class="tag dexterite">Dextérité</span><span class="tag force">Force</span></td><td>Manier une arme spécifique avec habileté (arc, épée...)</td></tr>
-                        <tr><td>Natation</td><td><span class="tag agilite">Agilité</span></td><td>Nager dans des conditions difficiles</td></tr>
-                        <tr><td>Négociation</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Trouver des arrangements et des compromis avec autrui</td></tr>
-                        <tr><td>Orientation</td><td><span class="tag perception">Perception</span></td><td>Se repérer dans un endroit inconnu ou peu connu</td></tr>
-                        <tr><td>Parade</td><td><span class="tag dexterite">Dextérité</span><span class="tag force">Force</span></td><td>Bloquer une attaque ennemie grâce à son arme ou un objet</td></tr>
-                        <tr><td>Perception magique</td><td><span class="tag perception">Perception</span></td><td>Détecter la présence de magie dans un lieu, un objet ou une personne</td></tr>
-                        <tr><td>Pistage</td><td><span class="tag perception">Perception</span></td><td>Suivre les traces d’une personne ou d’un animal</td></tr>
-                        <tr><td>Port de charges</td><td><span class="tag endurance">Endurance</span></td><td>Transporter avec soi des charges lourdes sur de longs trajets</td></tr>
-                        <tr><td>Précision</td><td><span class="tag dexterite">Dextérité</span></td><td>Réaliser des opérations minutieuses, toucher un point précis</td></tr>
-                        <tr><td>Premiers secours</td><td><span class="tag intelligence">Intelligence</span></td><td>Apporter des soins de base en attente de soins plus avancés</td></tr>
-                        <tr><td>Psychologie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Déceler les intentions d’autrui, détecter les mensonges</td></tr>
-                        <tr><td>Régulation thermique</td><td><span class="tag endurance">Endurance</span></td><td>Supporter les environnements avec des conditions thermiques extrêmes</td></tr>
-                        <tr><td>Résistance douleur</td><td><span class="tag endurance">Endurance</span></td><td>Encaisser les coups, ne pas s’effondrer face à la douleur</td></tr>
-                        <tr><td>Résistance sommeil</td><td><span class="tag endurance">Endurance</span></td><td>Rester éveillé pendant de longues périodes sans somnoler</td></tr>
-                        <tr><td>Riposte</td><td><span class="tag force">Force</span><span class="tag agilite">Agilité</span></td><td>Utiliser la force de l’adversaire contre lui pour contre-attaquer</td></tr>
-                        <tr><td>Sens surdéveloppé</td><td><span class="tag perception">Perception</span></td><td>Posséder un sens (vue, ouïe, odorat, goût, toucher) plus développé que la normale</td></tr>
-                        <tr><td>Soins avancés</td><td><span class="tag intelligence">Intelligence</span></td><td>Dispenser des soins complexes à quelqu'un pour soigner des blessures graves</td></tr>
-                        <tr><td>Surcharge</td><td><span class="tag mental">Mental</span></td><td>Outrepasser sa fatigue au prix d’une retombée physique après la période de surcharge</td></tr>
-                        <tr><td>Survie</td><td><span class="tag intelligence">Intelligence</span></td><td>Connaiître les rudiments de la survie (faire un feu, un abri, etc.)</td></tr>
-                        <tr><td>Tactique</td><td><span class="tag intelligence">Intelligence</span></td><td>Planifier des actions, élaborer et mettre en place des stratégies</td></tr>
-                        <tr><td>Transfert magique</td><td><span class="tag mental">Mental</span></td><td>Insuffler son pouvoir vers un élément extérieur</td></tr>
-                        <tr><td>Tromperie</td><td><span class="tag sociabilite">Sociabilité</span></td><td>Duper quelqu’un</td></tr>
-                        <tr><td>Vigilance</td><td><span class="tag perception">Perception</span></td><td>Rester sur ses gardes, repérer des menaces potentielles</td></tr>
-                        <tr><td>Vigueur</td><td><span class="tag endurance">Endurance</span></td><td>Maintenir un effort en situation de combat</td></tr>
-                        <tr><td>Vol à la tire</td><td><span class="tag dexterite">Dextérité</span></td><td>Faire les poches des passants</td></tr>
-                        <tr><td>Volonté</td><td><span class="tag mental">Mental</span></td><td>Persévérer lors de situations mentalement éprouvantes</td></tr>
-                    </tbody>
-                 </table>
-            </div>
-        </section>
+        </details>
     </main>
 
 <script>
