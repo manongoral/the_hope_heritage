@@ -291,15 +291,15 @@ textarea {
 /* On cible les cellules d'en-tête (th) pour définir la largeur des colonnes */
 
 #skillTable th:nth-child(1) {
-    width: 25%; /* Colonne Compétence */
+    width: 30%; /* Colonne Compétence */
 }
 
 #skillTable th:nth-child(2) {
-    width: 25%; /* Colonne Caractéristique */
+    width: 35%; /* Colonne Caractéristique */
 }
 
 #skillTable th:nth-child(3) {
-    width: 50%; /* Colonne Description (le reste de l'espace) */
+    width: 35%; /* Colonne Description (le reste de l'espace) */
 }
 
 /* Optionnel : Empêcher les noms de compétences de revenir à la ligne trop vite */
