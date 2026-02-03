@@ -349,17 +349,33 @@ textarea {
 
 /* --- Section Caractéristiques --- */
 .charac-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column; /* Force l'alignement vertical (l'un en dessous de l'autre) */
+    gap: 10px;              /* Espacement entre chaque ligne */
     margin-top: 20px;
+    max-width: 800px;       /* Optionnel : évite que la ligne soit trop longue sur grand écran */
 }
 
 .charac-item {
+    display: flex;
+    align-items: center;
     background: #2a2a2e;
-    padding: 15px;
+    padding: 10px 15px;
     border-left: 3px solid var(--primary);
     border-radius: 4px;
+}
+
+.charac-desc {
+    margin-left: 10px;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* On fixe la largeur des badges pour que tous les ":" soient alignés verticalement */
+.charac-item .tag {
+    width: 110px; 
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .charac-item p {
