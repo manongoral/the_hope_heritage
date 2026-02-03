@@ -290,53 +290,61 @@ textarea {
     border: 1px solid var(--primary);
 }
 
-/* --- Base du Tableau --- */
+/* --- Structure du Tableau --- */
 #skillTable {
     width: 100% !important;
-    table-layout: fixed;
+    table-layout: fixed !important; /* Force le respect strict des % */
     border-collapse: collapse;
     background-color: #2a2a2e;
     margin-top: 20px;
     border: 1px solid var(--primary);
 }
 
-/* --- Alignement Vertical Parfait --- */
+/* --- Forçage des colonnes 25% / 25% / 50% --- */
+#skillTable th:nth-child(1), #skillTable td:nth-child(1) { width: 25% !important; }
+#skillTable th:nth-child(2), #skillTable td:nth-child(2) { width: 25% !important; }
+#skillTable th:nth-child(3), #skillTable td:nth-child(3) { width: 50% !important; }
+
+/* --- Alignement Vertical et Horizontal --- */
 #skillTable th, #skillTable td {
-    padding: 30px 20px;
-    vertical-align: middle; /* Aligne tout le monde au centre verticalement */
+    padding: 25px 15px;
+    vertical-align: middle !important; /* Aligne tout le monde au milieu de la ligne */
     text-align: left;
     border-bottom: 1px solid #3d3d42;
+    overflow: hidden; /* Empêche le contenu de déformer la colonne */
 }
 
-/* Largeurs imposées */
-#skillTable th:nth-child(1), #skillTable td:nth-child(1) { width: 25%; font-weight: bold; color: var(--primary); }
-#skillTable th:nth-child(2), #skillTable td:nth-child(2) { width: 25%; }
-#skillTable th:nth-child(3), #skillTable td:nth-child(3) { width: 50%; font-size: 0.95rem; }
+/* Style spécifique pour la colonne Compétence */
+#skillTable td:first-child {
+    font-weight: bold;
+    color: var(--primary);
+}
 
 /* --- Conteneur des Badges --- */
 .tag-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center; /* Aligne les badges entre eux */
+    flex-wrap: wrap; /* Les badges passent dessous si la colonne (25%) est trop étroite */
+    gap: 5px;
+    align-items: center;
 }
 
-/* --- Palette Pastel (Assure-toi que ces noms correspondent à ton HTML) --- */
 .tag {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
     color: white;
+    white-space: nowrap; /* Le nom de la caractéristique ne se coupe pas */
 }
 
-.agilite { background-color: #f191c2; }      /* Rose */
-.force { background-color: #f1948a; }        /* Rouge */
-.endurance { background-color: #f8c471; }    /* Orange */
-.dexterite { background-color: #f7dc6f; color: #5d4037; } /* Jaune */
-.mental { background-color: #bb8fce; }       /* Violet */
-.intelligence { background-color: #aeb6bf; } /* Gris */
-.perception { background-color: #82e0aa; color: #1e8449; } /* Vert */
-.sociabilite { background-color: #85c1e9; }  /* Bleu */
+/* Tes couleurs pastels (assure-toi que l'orthographe est identique au HTML) */
+.agilite { background-color: #f191c2; }
+.force { background-color: #f1948a; }
+.endurance { background-color: #f8c471; }
+.dexterite { background-color: #f7dc6f; color: #5d4037; }
+.mental { background-color: #bb8fce; }
+.intelligence { background-color: #aeb6bf; }
+.perception { background-color: #82e0aa; color: #1e8449; }
+.sociabilite { background-color: #85c1e9; }
