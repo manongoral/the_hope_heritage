@@ -250,13 +250,16 @@
                     tableData.forEach(rowData => {
                         const row = body.insertRow();
                         
-                        // rowData est maintenant un objet {c0: "valeur", c1: "valeur"}
-                        // On boucle sur les propriétés de l'objet
-                        Object.values(rowData).forEach(val => {
+                        // On compte combien de clés il y a dans l'objet pour savoir combien de colonnes créer
+                        const nbCols = Object.keys(rowData).length;
+                
+                        // On boucle par index (0, 1, 2...) pour garantir l'ordre c0, c1, c2
+                        for (let i = 0; i < nbCols; i++) {
                             let cell = row.insertCell();
-                            cell.innerHTML = `<input type="text" class="table-input" value="${val}">`;
+                            let valeur = rowData["c" + i] || ""; // On va chercher spécifiquement "c0", puis "c1"...
+                            cell.innerHTML = `<input type="text" class="table-input" value="${valeur}">`;
                             cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
-                        });
+                        }
                         
                         // Bouton supprimer
                         let delCell = row.insertCell();
