@@ -86,14 +86,14 @@
         <h3>Compétences</h3>
         <table class="dynamic-table">
             <thead><tr><th>Compétence</th><th>Niveau</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyCompetences"></tbody>
+            <tbody> id="bodyCompetences"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodyCompetences', 2)">+ Ajouter une compétence</button>
 
         <h3>Talents</h3>
         <table class="dynamic-table">
             <thead><tr><th>Talent</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyTalents"></tbody>
+            <tbody> id="bodyTalents"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
 
@@ -150,27 +150,29 @@
         const body = document.getElementById(tableId);
         const row = body.insertRow();
         for (let i = 0; i < cols; i++) {
-          let cell = row.insertCell(i);
-          cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
-          // On attache la sauvegarde à chaque input
-          cell.querySelector('input').addEventListener('input', window.sauvegarder);
+            let cell = row.insertCell(i);
+            // Utilisation de 'input' pour sauvegarder à chaque frappe
+            cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
+            cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
         }
         let actionCell = row.insertCell(cols);
         actionCell.innerHTML = `<button class="btn-remove">X</button>`;
         actionCell.querySelector('button').onclick = function() {
-          row.remove();
-          window.sauvegarder();
+            row.remove();
+            window.sauvegarder(); // Sauvegarde après suppression
         };
-      };
+    };
     
       // --- RÉCUPÉRATION DES DONNÉES DES TABLEAUX ---
       const getTableData = (tableBodyId) => {
-        const rows = document.getElementById(tableBodyId).rows;
+        const body = document.getElementById(tableBodyId);
+        if (!body) return [];
+        const rows = body.rows;
         return Array.from(rows).map(row => {
-          const inputs = row.querySelectorAll('input.table-input');
-          return Array.from(inputs).map(input => input.value);
+            const inputs = row.querySelectorAll('input.table-input');
+            return Array.from(inputs).map(input => input.value);
         });
-      };
+    };
     
       // --- REMPLISSAGE DES TABLEAUX ---
       const setTableData = (tableBodyId, data, cols) => {
@@ -200,23 +202,21 @@
         
         // 1. Champs simples
         document.querySelectorAll('.save-field').forEach(el => {
-          data[el.id] = el.type === "number" ? (parseInt(el.value) || 0) : el.value;
+            data[el.id] = el.type === "number" ? (parseInt(el.value) || 0) : el.value;
         });
     
-        // 2. Tableaux
+        // 2. Tableaux (vérifie que les IDs correspondent bien au HTML)
         data.compData = getTableData('bodyCompetences');
         data.talentData = getTableData('bodyTalents');
         data.sortData = getTableData('bodySorts');
         data.invData = getTableData('bodyInventaire');
     
-        console.log("Tentative de sauvegarde...", data);
-    
         setDoc(persoRef, data, { merge: true })
-          .then(() => {
-            document.getElementById("statut").innerText = "Dernière modif à " + new Date().toLocaleTimeString();
-          })
-          .catch(err => console.error("Erreur de sauvegarde:", err));
-      };
+            .then(() => {
+                document.getElementById("statut").innerText = "Dernière modif à " + new Date().toLocaleTimeString();
+            })
+            .catch(err => console.error("Erreur de sauvegarde:", err));
+    };
     
       // --- CHARGEMENT ---
       onSnapshot(persoRef, (doc) => {
