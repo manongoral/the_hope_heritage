@@ -266,3 +266,69 @@ textarea {
     gap: 15px;
     margin-bottom: 10px;
 }
+
+/* --- Styles pour le tableau des compétences --- */
+
+.search-container {
+    margin: 20px 0;
+}
+
+#skillSearch {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+}
+
+.table-wrapper {
+    overflow-x: auto; /* Permet le défilement sur mobile */
+    margin-top: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+#skillTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    min-width: 600px;
+}
+
+#skillTable th {
+    background-color: #34495e;
+    color: white;
+    text-align: left;
+    padding: 15px;
+}
+
+#skillTable td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+#skillTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* --- Badges de caractéristiques --- */
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.agilite { background-color: #27ae60; }     /* Vert */
+.force { background-color: #e67e22; }      /* Orange/Rouge */
+.endurance { background-color: #c0392b; }  /* Rouge foncé */
+.intelligence { background-color: #2980b9; }/* Bleu */
+.mental { background-color: #8e44ad; }     /* Violet */
+.perception { background-color: #16a085; } /* Turquoise */
+.sociabilite { background-color: #f1c40f; color: #333; } /* Jaune */
+.dexterite { background-color: #7f8c8d; }  /* Gris */
+.mixte { background-color: #34495e; }      /* Sombre */
