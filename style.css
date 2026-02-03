@@ -80,8 +80,9 @@ body {
 
 /* Sections */
 .content-section {
-    padding: 60px 10%;
-    border-bottom: 1px solid #333;
+    padding: 60px 5%; /* On passe de 10% à 5% pour gagner de la place */
+    max-width: 1400px; /* On s'assure que ça peut s'étaler */
+    margin: 0 auto;
 }
 
 .content-section h2 {
@@ -275,57 +276,66 @@ textarea {
 
 #skillSearch {
     width: 100%;
-    padding: 12px 15px;
+    padding: 15px;
     font-size: 16px;
-    border: 2px solid #34495e;
+    border: 2px solid var(--primary); /* Utilise ton doré pour l'harmonie */
     border-radius: 5px;
     background-color: #fdfdfd;
+    color: #333;
 }
 
 .table-wrapper {
-    overflow-x: auto; /* Permet le défilement sur mobile */
-    margin-top: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid var(--primary);
 }
-
-/* On cible les cellules d'en-tête (th) pour définir la largeur des colonnes */
 
 #skillTable {
-    width: 100%;
-    table-layout: fixed; /* TRÈS IMPORTANT : force le respect des largeurs imposées */
+    width: 100%; /* Prend toute la largeur de .content-section */
+    table-layout: fixed; /* Force le respect des largeurs */
     border-collapse: collapse;
+    background-color: #2a2a2e; /* Fond sombre pour coller à ton site */
+    color: var(--text-light);
 }
 
-#skillTable th:nth-child(1) {
-    width: 30%; /* Colonne Compétence */
+/* RÉGLAGE DES LARGEURS */
+#skillTable th:nth-child(1) { width: 35%; } /* Compétence très large */
+#skillTable th:nth-child(2) { width: 35%; } /* Caractéristique très large */
+#skillTable th:nth-child(3) { width: 30%; } /* Description plus étroite */
+
+#skillTable th {
+    background-color: #000;
+    color: var(--primary);
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid var(--primary);
+    text-transform: uppercase;
 }
 
-#skillTable th:nth-child(2) {
-    width: 35%; /* Colonne Caractéristique */
+#skillTable td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    vertical-align: middle;
 }
 
-#skillTable th:nth-child(3) {
-    width: 35%; /* Colonne Description (le reste de l'espace) */
-}
-
-/* Optionnel : Empêcher les noms de compétences de revenir à la ligne trop vite */
-#skillTable td:first-child {
-    white-space: nowrap; 
-    font-weight: bold;
+#skillTable tr:hover {
+    background-color: #333; /* Effet de survol */
 }
 
 /* --- Badges de caractéristiques --- */
 .tag {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 12px;
+    display: block; /* Prend toute la largeur de la cellule pour être bien visible */
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 11px;
     font-weight: bold;
     color: white;
     text-transform: uppercase;
     text-align: center;
-    min-width: 100px; /* Aligne les badges à une largeur minimum identique */
+    white-space: normal; /* Permet le retour à la ligne si "Dextérité ou Intelligence" */
 }
+
+/* Tes couleurs de tags sont parfaites, garde-les en dessous */
 
 .agilite { background-color: #27ae60; }     /* Vert */
 .force { background-color: #e67e22; }      /* Orange/Rouge */
