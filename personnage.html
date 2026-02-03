@@ -86,21 +86,21 @@
         <h3>Compétences</h3>
         <table class="dynamic-table">
             <thead><tr><th>Compétence</th><th>Niveau</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyCompetences"></tbody></table>
+            <tbody id="bodyCompetences"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodyCompetences', 2)">+ Ajouter une compétence</button>
 
         <h3>Talents</h3>
         <table class="dynamic-table">
             <thead><tr><th>Talent</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyTalents"></tbody></table>
+            <tbody id="bodyTalents"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
 
         <h3>Sorts</h3>
         <table class="dynamic-table">
             <thead><tr><th>Rang</th><th>Nom</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodySorts"></tbody>
+            <tbody> id="bodySorts"></tbody>
         </table>
         <button class="btn-add" onclick="addRow('bodySorts', 3)">+ Ajouter un sort</button>
 
@@ -149,17 +149,22 @@
       
       // On attache la fonction à "window" pour que le "onclick" du HTML la voie
       window.addRow = function(tableId, cols) {
-        const body = document.getElementById(tableId);
-        const row = body.insertRow();
-        for (let i = 0; i < cols; i++) {
-          let cell = row.insertCell(i);
-          cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
-          // Sauvegarde auto quand on écrit dans la nouvelle ligne
-          cell.querySelector('input').addEventListener('input', window.sauvegarder);
-        }
-        let actionCell = row.insertCell(cols);
-        actionCell.innerHTML = `<button class="btn-remove" onclick="this.parentElement.parentElement.remove(); window.sauvegarder();">X</button>`;
-      };
+          const body = document.getElementById(tableId);
+          const row = body.insertRow();
+          for (let i = 0; i < cols; i++) {
+            let cell = row.insertCell(i);
+            // Important : ajouter l'écouteur 'input' immédiatement
+            cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
+            cell.querySelector('input').addEventListener('input', window.sauvegarder);
+          }
+          let actionCell = row.insertCell(cols);
+          actionCell.innerHTML = `<button class="btn-remove">X</button>`;
+          // On gère la suppression proprement
+          actionCell.querySelector('button').onclick = function() {
+            row.remove();
+            window.sauvegarder();
+          };
+        };
     
       const getTableData = (tableBodyId) => {
         const rows = document.getElementById(tableBodyId).rows;
@@ -204,29 +209,34 @@
     
       // --- CHARGEMENT ---
       onSnapshot(persoRef, (doc) => {
-        if (doc.exists()) {
-          const data = doc.data();
-          // On ne met à jour que si l'utilisateur n'est pas en train d'écrire
-          if (!document.activeElement.classList.contains('table-input') && 
-              !document.activeElement.classList.contains('save-field')) {
+          if (doc.exists()) {
+            const data = doc.data();
             
+            // Vérifier si l'utilisateur est en train d'écrire dans un tableau ou un champ
+            const isEditing = document.activeElement.classList.contains('table-input') || 
+                             document.activeElement.classList.contains('save-field') ||
+                             document.activeElement.tagName === "TEXTAREA";
+        
+            // Mise à jour des champs classiques (seulement si on ne tape pas dedans)
             document.querySelectorAll('.save-field').forEach(el => {
-              el.value = data[el.id] || (el.type === "number" ? 0 : "");
+              if (document.activeElement !== el) {
+                el.value = data[el.id] !== undefined ? data[el.id] : (el.type === "number" ? 0 : "");
+              }
             });
-    
-            setTableData('bodyCompetences', data.compData, 2);
-            setTableData('bodyTalents', data.talentData, 2);
-            setTableData('bodySorts', data.sortData, 3);
-            setTableData('bodyInventaire', data.invData, 3);
+        
+            // MISE À JOUR DES TABLEAUX : seulement si l'utilisateur n'est PAS en train d'éditer
+            // Sinon, la reconstruction du tableau fait perdre le focus et les données en cours
+            if (!isEditing) {
+              setTableData('bodyCompetences', data.compData, 2);
+              setTableData('bodyTalents', data.talentData, 2);
+              setTableData('bodySorts', data.sortData, 3);
+              setTableData('bodyInventaire', data.invData, 3);
+            }
+            
+            document.getElementById("statut").innerText = "Fiche synchronisée (" + joueurID + ")";
+            document.getElementById("statut").style.color = "#4CAF50";
           }
-          document.getElementById("statut").innerText = "Connecté : " + joueurID;
-        }
-      });
-    
-      // Écouteurs sur les champs fixes
-      document.querySelectorAll('.save-field').forEach(el => {
-        el.addEventListener('input', window.sauvegarder);
-      });
+        });
     </script>
 </body>
 </html>
