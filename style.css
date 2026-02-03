@@ -290,6 +290,12 @@ textarea {
 
 /* On cible les cellules d'en-tête (th) pour définir la largeur des colonnes */
 
+#skillTable {
+    width: 100%;
+    table-layout: fixed; /* TRÈS IMPORTANT : force le respect des largeurs imposées */
+    border-collapse: collapse;
+}
+
 #skillTable th:nth-child(1) {
     width: 30%; /* Colonne Compétence */
 }
