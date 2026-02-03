@@ -288,39 +288,37 @@ textarea {
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
-#skillTable {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    min-width: 600px;
+/* On cible les cellules d'en-tête (th) pour définir la largeur des colonnes */
+
+#skillTable th:nth-child(1) {
+    width: 25%; /* Colonne Compétence */
 }
 
-#skillTable th {
-    background-color: #34495e;
-    color: white;
-    text-align: left;
-    padding: 15px;
+#skillTable th:nth-child(2) {
+    width: 25%; /* Colonne Caractéristique */
 }
 
-#skillTable td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
+#skillTable th:nth-child(3) {
+    width: 50%; /* Colonne Description (le reste de l'espace) */
 }
 
-#skillTable tr:hover {
-    background-color: #f1f1f1;
+/* Optionnel : Empêcher les noms de compétences de revenir à la ligne trop vite */
+#skillTable td:first-child {
+    white-space: nowrap; 
+    font-weight: bold;
 }
 
 /* --- Badges de caractéristiques --- */
 .tag {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 15px;
     font-size: 12px;
     font-weight: bold;
     color: white;
     text-transform: uppercase;
+    text-align: center;
+    min-width: 100px; /* Aligne les badges à une largeur minimum identique */
 }
 
 .agilite { background-color: #27ae60; }     /* Vert */
