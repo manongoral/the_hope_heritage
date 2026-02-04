@@ -16,6 +16,11 @@
         </ul>
     </nav>
 
+    <button onclick="window.sauvegarder()" style="position: fixed; top: 10px; right: 10px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer;">
+        💾 Sauvegarder les modifications
+    </button>
+    <div id="statut">Connecté</div>
+
     <main class="content-section">
     <h1>Fiche de : <span id="displayID">...</span></h1>
     
@@ -153,6 +158,24 @@
       document.getElementById('displayID').innerText = joueurID;
     
       const persoRef = doc(db, "personnages", joueurID);
+
+      let estModifie = false;
+
+        // On écoute TOUS les changements dans la page
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('table-input') || e.target.classList.contains('save-field')) {
+                estModifie = true;
+                document.getElementById("statut").innerText = "⚠️ Changements non sauvegardés";
+            }
+        });
+        
+        // Alerte si on quitte la page
+        window.addEventListener('beforeunload', (e) => {
+            if (estModifie) {
+                e.preventDefault();
+                e.returnValue = ''; // Message standard du navigateur
+            }
+        });  
     
       // --- FONCTION SAUVEGARDE (DÉFINIE EN PREMIER) ---
       window.sauvegarder = function() {
@@ -178,6 +201,15 @@
                 });
                 return rowObject; 
             });
+        setDoc(persoRef, data, { merge: true })
+          .then(() => {
+            estModifie = false; // Réinitialisation de l'état
+            document.getElementById("statut").innerText = "✔ Sauvegardé à " + new Date().toLocaleTimeString();
+          })
+          .catch(err => {
+            console.error("Erreur Firebase:", err);
+            document.getElementById("statut").innerText = "❌ Erreur de connexion";
+          });
         };
     
         data.compData = getTableData('bodyCompetences');
@@ -208,7 +240,7 @@
             cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
             
             // CRUCIAL : On dit à l'input de sauvegarder dès qu'on tape dedans
-            cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
+            //cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
         }
     
         // Bouton de suppression
@@ -258,7 +290,7 @@
                             let cell = row.insertCell();
                             let valeur = rowData["c" + i] || ""; // On va chercher spécifiquement "c0", puis "c1"...
                             cell.innerHTML = `<input type="text" class="table-input" value="${valeur}">`;
-                            cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
+                            //cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
                         }
                         
                         // Bouton supprimer
@@ -277,14 +309,30 @@
               fillTable('bodySorts', data.sortData);
               fillTable('bodyInventaire', data.invData);
             }
-            
+            estModifie = false;
             document.getElementById("statut").innerText = "Connecté : " + joueurID;
           }
         });
         
         // Écouteurs initiaux sur les champs statiques (Nom, Age, etc.)
-        document.querySelectorAll('.save-field').forEach(el => {
-          el.addEventListener('input', () => window.sauvegarder());
+        //document.querySelectorAll('.save-field').forEach(el => {el.addEventListener('input', () => window.sauvegarder());
+        });
+
+        // Détecter n'importe quel changement dans la page
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('table-input') || e.target.classList.contains('save-field')) {
+                estModifie = true;
+                document.getElementById("statut").innerText = "⚠️ Modifications non enregistrées";
+                document.getElementById("btnSauver").style.background = "#dc3545"; // Devient rouge
+            }
+        });
+        
+        // Alerte anti-fermeture de page
+        window.addEventListener('beforeunload', (e) => {
+            if (estModifie) {
+                e.preventDefault();
+                e.returnValue = ''; 
+            }
         });
     
     </script>
