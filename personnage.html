@@ -16,120 +16,112 @@
         </ul>
     </nav>
 
-    <button onclick="window.sauvegarder()" style="position: fixed; top: 10px; right: 10px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer;">
+    <button id="btnSauver" onclick="window.sauvegarder()" style="position: fixed; top: 70px; right: 20px; padding: 12px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; z-index: 1001; font-weight: bold; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
         💾 Sauvegarder les modifications
     </button>
-    <div id="statut">Connecté</div>
 
     <main class="content-section">
-    <h1>Fiche de : <span id="displayID">...</span></h1>
-    
-    <div class="card">
-        <h2 class="section-title">Informations générales</h2>
-        <div class="grid-container">
-            <div class="input-group"><label>Nom & Prénom</label><input type="text" id="nomComplet" class="save-field"></div>
-            <div class="input-group"><label>Âge</label><input type="number" id="age" class="save-field"></div>
-            <div class="input-group"><label>Faction</label><input type="text" id="faction" class="save-field"></div>
-            <div class="input-group"><label>Pouvoir</label><input type="text" id="pouvoir" class="save-field"></div>
-            <div class="input-group"><label>École de Combat</label><input type="text" id="ecoleCombat" class="save-field"></div>
-            <div class="input-group"><label>Religion</label><input type="text" id="religion" class="save-field"></div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <h1>Fiche de : <span id="displayID">...</span></h1>
+            <p id="statut" style="background: #eee; padding: 5px 10px; border-radius: 4px; font-weight: bold;">Connexion...</p>
         </div>
-
-        <div class="grid-container">
-            <section>
-                <h2 class="section-title">Physique</h2>
-                <div class="input-group"><label>Taille / Poids</label><input type="text" id="physique_tp" class="save-field"></div>
-                <div class="input-group"><label>Yeux / Cheveux</label><input type="text" id="physique_yc" class="save-field"></div>
-                <div class="input-group"><label>Style Vestimentaire</label><textarea id="styleVest" class="save-field"></textarea></div>
-                <div class="input-group"><label>Traits Particuliers</label><textarea id="traitsPart" class="save-field"></textarea></div>
-            </section>
-            <section>
-                <h2 class="section-title">Personnalité et Relations</h2>
-                <div class="input-group"><label>Qualités</label><input type="text" id="qualites" class="save-field"></div>
-                <div class="input-group"><label>Défauts</label><input type="text" id="defauts" class="save-field"></div>
-                <div class="input-group"><label>Famille</label><textarea id="famille" class="save-field"></textarea></div>
-                <div class="input-group"><label>Amis</label><textarea id="amis" class="save-field"></textarea></div>
-            </section>
-        </div>
-
-        <h2 class="section-title">Caractéristiques</h2>
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>For</th>
-                    <th>End</th>
-                    <th>Agi</th>
-                    <th>Dex</th>
-                    <th>Per</th>
-                    <th>Men</th>
-                    <th>Int</th>
-                    <th>Soc</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="number" id="force" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="endurance" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="agilite" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="dexterite" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="perception" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="mental" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="intelligence" class="save-field stat-input" value="10"></td>
-                    <td><input type="number" id="sociabilite" class="save-field stat-input" value="10"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="section-title">Équipement de Combat</h2>
-        <div class="input-group">
-            <label>Arme</label>
-            <input type="text" id="armePortee" class="save-field" placeholder="Nom de l'arme...">
-        </div>
-
-        <h2 class="section-title">Compétences, talents et sorts</h2>
         
-        <h3>Compétences</h3>
-        <table class="dynamic-table">
-            <thead><tr><th>Compétence</th><th>Niveau</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyCompetences"></tbody>
-        </table>
-        <button class="btn-add" onclick="addRow('bodyCompetences', 3)">+ Ajouter une compétence</button>
+        <div class="card">
+            <h2 class="section-title">Informations générales</h2>
+            <div class="grid-container">
+                <div class="input-group"><label>Nom & Prénom</label><input type="text" id="nomComplet" class="save-field"></div>
+                <div class="input-group"><label>Âge</label><input type="number" id="age" class="save-field"></div>
+                <div class="input-group"><label>Faction</label><input type="text" id="faction" class="save-field"></div>
+                <div class="input-group"><label>Pouvoir</label><input type="text" id="pouvoir" class="save-field"></div>
+                <div class="input-group"><label>École de Combat</label><input type="text" id="ecoleCombat" class="save-field"></div>
+                <div class="input-group"><label>Religion</label><input type="text" id="religion" class="save-field"></div>
+            </div>
 
-        <h3>Talents</h3>
-        <table class="dynamic-table">
-            <thead><tr><th>Talent</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodyTalents"></tbody>
-        </table>
-        <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
+            <div class="grid-container">
+                <section>
+                    <h2 class="section-title">Physique</h2>
+                    <div class="input-group"><label>Taille / Poids</label><input type="text" id="physique_tp" class="save-field"></div>
+                    <div class="input-group"><label>Yeux / Cheveux</label><input type="text" id="physique_yc" class="save-field"></div>
+                    <div class="input-group"><label>Style Vestimentaire</label><textarea id="styleVest" class="save-field"></textarea></div>
+                    <div class="input-group"><label>Traits Particuliers</label><textarea id="traitsPart" class="save-field"></textarea></div>
+                </section>
+                <section>
+                    <h2 class="section-title">Personnalité et Relations</h2>
+                    <div class="input-group"><label>Qualités</label><input type="text" id="qualites" class="save-field"></div>
+                    <div class="input-group"><label>Défauts</label><input type="text" id="defauts" class="save-field"></div>
+                    <div class="input-group"><label>Famille</label><textarea id="famille" class="save-field"></textarea></div>
+                    <div class="input-group"><label>Amis</label><textarea id="amis" class="save-field"></textarea></div>
+                </section>
+            </div>
 
-        <h3>Sorts</h3>
-        <table class="dynamic-table">
-            <thead><tr><th>Rang</th><th>Nom</th><th>Description</th><th></th></tr></thead>
-            <tbody id="bodySorts"></tbody>
-        </table>
-        <button class="btn-add" onclick="addRow('bodySorts', 3)">+ Ajouter un sort</button>
+            <h2 class="section-title">Caractéristiques</h2>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>For</th><th>End</th><th>Agi</th><th>Dex</th><th>Per</th><th>Men</th><th>Int</th><th>Soc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="number" id="force" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="endurance" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="agilite" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="dexterite" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="perception" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="mental" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="intelligence" class="save-field stat-input" value="10"></td>
+                        <td><input type="number" id="sociabilite" class="save-field stat-input" value="10"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <h2 class="section-title">Inventaire</h2>
-        <div class="money-section">
-            <label><strong>Fortune (Noz) :</strong></label>
-            <input type="number" id="argentNoz" class="save-field" style="width: 120px;">
+            <h2 class="section-title">Équipement de Combat</h2>
+            <div class="input-group">
+                <label>Arme</label>
+                <input type="text" id="armePortee" class="save-field" placeholder="Nom de l'arme...">
+            </div>
+
+            <h2 class="section-title">Compétences, talents et sorts</h2>
+            <h3>Compétences</h3>
+            <table class="dynamic-table">
+                <thead><tr><th>Compétence</th><th>Niveau</th><th>Description</th><th></th></tr></thead>
+                <tbody id="bodyCompetences"></tbody>
+            </table>
+            <button class="btn-add" onclick="addRow('bodyCompetences', 3)">+ Ajouter une compétence</button>
+
+            <h3>Talents</h3>
+            <table class="dynamic-table">
+                <thead><tr><th>Talent</th><th>Description</th><th></th></tr></thead>
+                <tbody id="bodyTalents"></tbody>
+            </table>
+            <button class="btn-add" onclick="addRow('bodyTalents', 2)">+ Ajouter un talent</button>
+
+            <h3>Sorts</h3>
+            <table class="dynamic-table">
+                <thead><tr><th>Rang</th><th>Nom</th><th>Description</th><th></th></tr></thead>
+                <tbody id="bodySorts"></tbody>
+            </table>
+            <button class="btn-add" onclick="addRow('bodySorts', 3)">+ Ajouter un sort</button>
+
+            <h2 class="section-title">Inventaire</h2>
+            <div class="money-section">
+                <label><strong>Fortune (Noz) :</strong></label>
+                <input type="number" id="argentNoz" class="save-field" style="width: 120px;">
+            </div>
+            <table class="dynamic-table">
+                <thead><tr><th>Objet</th><th>Description</th><th>Quantité</th><th></th></tr></thead>
+                <tbody id="bodyInventaire"></tbody>
+            </table>
+            <button class="btn-add" onclick="addRow('bodyInventaire', 3)">+ Ajouter un objet</button>
+
+            <h2 class="section-title">Histoire du Personnage</h2>
+            <textarea id="histoirePerso" class="save-field" style="min-height: 250px;"></textarea>
         </div>
-        <table class="dynamic-table">
-            <thead><tr><th>Objet</th><th>Description</th><th>Quantité</th><th></th></tr></thead>
-            <tbody id="bodyInventaire"></tbody>
-        </table>
-        <button class="btn-add" onclick="addRow('bodyInventaire', 3)">+ Ajouter un objet</button>
-
-        <h2 class="section-title">Histoire du Personnage</h2>
-        <textarea id="histoirePerso" class="save-field" style="min-height: 250px;"></textarea>
-
-        <p id="statut">Synchronisation...</p>
-    </div>
-</main>
+    </main>
 
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     
       const firebaseConfig = {
           apiKey: "AIzaSyAhl7MuvCy54F4Qt27mtlVAqmCu4Bg-KCE",
@@ -140,201 +132,140 @@
           appId: "1:472185106488:web:496f37e901690987f536cd"
         };
 
-    
-      // Initialisation
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-    
-      // --- GESTION DU NOM ---
-      const urlParams = new URLSearchParams(window.location.search);
-      let joueurID = urlParams.get('id');
-    
-      // Si pas d'ID, on demande. window.confirm ou window.prompt
-      if (!joueurID) {
-        joueurID = window.prompt("Quel personnage voulez-vous charger ?");
-      }
-    
-      if (!joueurID) joueurID = "Anonyme";
-      document.getElementById('displayID').innerText = joueurID;
-    
-      const persoRef = doc(db, "personnages", joueurID);
+    const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      let estModifie = false;
+        // --- ÉTAT ---
+        let estModifie = false;
 
-        // On écoute TOUS les changements dans la page
-        document.addEventListener('input', (e) => {
-            if (e.target.classList.contains('table-input') || e.target.classList.contains('save-field')) {
-                estModifie = true;
-                document.getElementById("statut").innerText = "⚠️ Changements non sauvegardés";
-            }
-        });
+        // --- GESTION DU NOM ---
+        const urlParams = new URLSearchParams(window.location.search);
+        let joueurID = urlParams.get('id');
+
+        if (!joueurID) {
+            joueurID = window.prompt("Quel personnage voulez-vous charger ?");
+        }
+        if (!joueurID) joueurID = "Anonyme";
         
-        // Alerte si on quitte la page
-        window.addEventListener('beforeunload', (e) => {
-            if (estModifie) {
-                e.preventDefault();
-                e.returnValue = ''; // Message standard du navigateur
-            }
-        });  
-    
-      // --- FONCTION SAUVEGARDE (DÉFINIE EN PREMIER) ---
-      window.sauvegarder = function() {
-        const data = {};
-        
-        // Sauvegarde des champs simples
-        document.querySelectorAll('.save-field').forEach(el => {
-          data[el.id] = el.type === "number" ? (parseInt(el.value) || 0) : el.value;
-        });
-    
-        // Sauvegarde des tableaux dynamiques
+        document.getElementById('displayID').innerText = joueurID;
+        const persoRef = doc(db, "personnages", joueurID);
+
+        // --- FONCTIONS DE RÉCUPÉRATION ---
         const getTableData = (tableBodyId) => {
             const body = document.getElementById(tableBodyId);
             if (!body) return [];
-            
             const rows = Array.from(body.rows);
             return rows.map(row => {
                 const inputs = row.querySelectorAll('input.table-input');
                 const rowObject = {};
-                // On crée des clés dynamiques : c0, c1, c2... pour chaque colonne
                 inputs.forEach((input, index) => {
                     rowObject["c" + index] = input.value;
                 });
-                return rowObject; 
+                return rowObject;
             });
-        setDoc(persoRef, data, { merge: true })
-          .then(() => {
-            estModifie = false; // Réinitialisation de l'état
-            document.getElementById("statut").innerText = "✔ Sauvegardé à " + new Date().toLocaleTimeString();
-          })
-          .catch(err => {
-            console.error("Erreur Firebase:", err);
-            document.getElementById("statut").innerText = "❌ Erreur de connexion";
-          });
         };
-    
-        data.compData = getTableData('bodyCompetences');
-        data.talentData = getTableData('bodyTalents');
-        data.sortData = getTableData('bodySorts');
-        data.invData = getTableData('bodyInventaire');
-    
-        console.log("Données envoyées :", data);
-    
-        setDoc(persoRef, data, { merge: true })
-          .then(() => {
-            document.getElementById("statut").innerText = "✔ Sauvegardé à " + new Date().toLocaleTimeString();
-          })
-          .catch(err => {
-            console.error("Erreur Firebase:", err);
-            document.getElementById("statut").innerText = "❌ Erreur de connexion";
-          });
-      };
-    
-      // --- GESTION DES LIGNES ---
-      window.addRow = function(tableId, cols) {
-        const body = document.getElementById(tableId);
-        if (!body) return;
-    
-        const row = body.insertRow();
-        for (let i = 0; i < cols; i++) {
-            let cell = row.insertCell(i);
-            cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
+
+        // --- SAUVEGARDE ---
+        window.sauvegarder = function() {
+            const data = {};
             
-            // CRUCIAL : On dit à l'input de sauvegarder dès qu'on tape dedans
-            //cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
-        }
-    
-        // Bouton de suppression
-        let actionCell = row.insertCell(cols);
-        actionCell.innerHTML = `<button class="btn-remove">X</button>`;
-        actionCell.querySelector('button').onclick = function() {
-            row.remove();
-            window.sauvegarder(); // On sauvegarde aussi après une suppression
+            // Champs simples
+            document.querySelectorAll('.save-field').forEach(el => {
+                data[el.id] = el.type === "number" ? (parseInt(el.value) || 0) : el.value;
+            });
+
+            // Tableaux
+            data.compData = getTableData('bodyCompetences');
+            data.talentData = getTableData('bodyTalents');
+            data.sortData = getTableData('bodySorts');
+            data.invData = getTableData('bodyInventaire');
+
+            setDoc(persoRef, data, { merge: true })
+                .then(() => {
+                    estModifie = false;
+                    document.getElementById("statut").innerText = "✔ Sauvegardé à " + new Date().toLocaleTimeString();
+                    document.getElementById("btnSauver").style.background = "#4CAF50";
+                })
+                .catch(err => {
+                    console.error("Erreur Firebase:", err);
+                    document.getElementById("statut").innerText = "❌ Erreur de connexion";
+                });
         };
-    };
-    
-      // --- CHARGEMENT ET MISE À JOUR ---
-        onSnapshot(persoRef, (docSnap) => {
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            
-            // On ne met à jour les champs QUE si l'utilisateur n'est pas en train d'écrire
-            // pour éviter que le curseur ne saute ou que le texte ne disparaisse
-            const isTyping = document.activeElement.classList.contains('table-input') || 
-                             document.activeElement.classList.contains('save-field') ||
-                             document.activeElement.tagName === "TEXTAREA";
-        
-            if (!isTyping) {
-              console.log("Mise à jour des données reçue...");
-        
-              // Remplissage champs fixes
-              document.querySelectorAll('.save-field').forEach(el => {
-                if (data[el.id] !== undefined) el.value = data[el.id];
-              });
-        
-              // Fonction interne de remplissage des tableaux
-                const fillTable = (id, tableData) => {
-                    const body = document.getElementById(id);
-                    if (!body) return;
-                    
-                    body.innerHTML = "";
-                    if (!tableData || !Array.isArray(tableData)) return;
-                
-                    tableData.forEach(rowData => {
-                        const row = body.insertRow();
-                        
-                        // On compte combien de clés il y a dans l'objet pour savoir combien de colonnes créer
-                        const nbCols = Object.keys(rowData).length;
-                
-                        // On boucle par index (0, 1, 2...) pour garantir l'ordre c0, c1, c2
-                        for (let i = 0; i < nbCols; i++) {
-                            let cell = row.insertCell();
-                            let valeur = rowData["c" + i] || ""; // On va chercher spécifiquement "c0", puis "c1"...
-                            cell.innerHTML = `<input type="text" class="table-input" value="${valeur}">`;
-                            //cell.querySelector('input').addEventListener('input', () => window.sauvegarder());
-                        }
-                        
-                        // Bouton supprimer
-                        let delCell = row.insertCell();
-                        delCell.innerHTML = `<button class="btn-remove">X</button>`;
-                        delCell.querySelector('button').onclick = () => { 
-                            row.remove(); 
-                            window.sauvegarder(); 
-                        };
-                    });
-                };
-        
-              // Exécution pour chaque tableau
-              fillTable('bodyCompetences', data.compData);
-              fillTable('bodyTalents', data.talentData);
-              fillTable('bodySorts', data.sortData);
-              fillTable('bodyInventaire', data.invData);
+
+        // --- GESTION DES LIGNES ---
+        window.addRow = function(tableId, cols) {
+            const body = document.getElementById(tableId);
+            if (!body) return;
+            const row = body.insertRow();
+            for (let i = 0; i < cols; i++) {
+                let cell = row.insertCell(i);
+                cell.innerHTML = `<input type="text" class="table-input" placeholder="...">`;
             }
-            estModifie = false;
-            document.getElementById("statut").innerText = "Connecté : " + joueurID;
-          }
-        });
-        
-        // Écouteurs initiaux sur les champs statiques (Nom, Age, etc.)
-        //document.querySelectorAll('.save-field').forEach(el => {el.addEventListener('input', () => window.sauvegarder());
+            let actionCell = row.insertCell(cols);
+            actionCell.innerHTML = `<button class="btn-remove">X</button>`;
+            actionCell.querySelector('button').onclick = function() {
+                row.remove();
+                estModifie = true;
+                document.getElementById("btnSauver").style.background = "#dc3545";
+            };
+        };
+
+        // --- CHARGEMENT ---
+        onSnapshot(persoRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                const isTyping = document.activeElement.classList.contains('table-input') || 
+                                 document.activeElement.classList.contains('save-field') ||
+                                 document.activeElement.tagName === "TEXTAREA";
+
+                if (!isTyping && !estModifie) {
+                    // Champs fixes
+                    document.querySelectorAll('.save-field').forEach(el => {
+                        if (data[el.id] !== undefined) el.value = data[el.id];
+                    });
+
+                    // Tableaux
+                    const fillTable = (id, tableData) => {
+                        const body = document.getElementById(id);
+                        if (!body || !tableData || !Array.isArray(tableData)) return;
+                        body.innerHTML = "";
+                        tableData.forEach(rowData => {
+                            const row = body.insertRow();
+                            const nbCols = Object.keys(rowData).length;
+                            for (let i = 0; i < nbCols; i++) {
+                                let cell = row.insertCell();
+                                cell.innerHTML = `<input type="text" class="table-input" value="${rowData["c" + i] || ""}">`;
+                            }
+                            let delCell = row.insertCell();
+                            delCell.innerHTML = `<button class="btn-remove">X</button>`;
+                            delCell.querySelector('button').onclick = () => { row.remove(); estModifie = true; };
+                        });
+                    };
+
+                    fillTable('bodyCompetences', data.compData);
+                    fillTable('bodyTalents', data.talentData);
+                    fillTable('bodySorts', data.sortData);
+                    fillTable('bodyInventaire', data.invData);
+                }
+                document.getElementById("statut").innerText = "Connecté : " + joueurID;
+            }
         });
 
-        // Détecter n'importe quel changement dans la page
+        // --- ÉCOUTEURS ---
         document.addEventListener('input', (e) => {
             if (e.target.classList.contains('table-input') || e.target.classList.contains('save-field')) {
                 estModifie = true;
                 document.getElementById("statut").innerText = "⚠️ Modifications non enregistrées";
-                document.getElementById("btnSauver").style.background = "#dc3545"; // Devient rouge
+                document.getElementById("btnSauver").style.background = "#dc3545";
             }
         });
-        
-        // Alerte anti-fermeture de page
+
         window.addEventListener('beforeunload', (e) => {
             if (estModifie) {
                 e.preventDefault();
-                e.returnValue = ''; 
+                e.returnValue = '';
             }
         });
-    
     </script>
 </body>
 </html>
