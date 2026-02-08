@@ -460,3 +460,71 @@ details summary::-webkit-details-marker {
     background: rgba(0, 0, 0, 0.05); /* Un fond léger pour distinguer le texte */
     margin-top: 5px;
 }
+
+/* --- Style des Carrières --- */
+
+/* Titre principal de la classe (Égide) */
+.class-title {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #34495e;
+    display: inline-block;
+}
+
+/* Container de la description */
+.class-desc p {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Titres des spécialisations */
+.specialization-title {
+    background: #34495e;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Amélioration des tableaux spécifiques aux classes */
+.class-item table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.class-item th {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #bdc3c7;
+}
+
+.class-item td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Effet zébré pour la lisibilité */
+.class-item tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Effet au survol des lignes */
+.class-item tbody tr:hover {
+    background-color: #f1f7ff;
+    transition: 0.2s;
+}
