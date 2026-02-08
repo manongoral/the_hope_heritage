@@ -341,10 +341,10 @@ textarea {
 .force { background-color: #f1948a; }
 .endurance { background-color: #f8c471; }
 .agilite { background-color: #f191c2; }
-.dexterite { background-color: #f7dc6f; color: #5d4037; }
+.dexterite { background-color: #f7dc6f; }
 .mental { background-color: #bb8fce; }
 .intelligence { background-color: #aeb6bf; }
-.perception { background-color: #82e0aa; color: #1e8449; }
+.perception { background-color: #82e0aa; }
 .sociabilite { background-color: #85c1e9; }
 
 /* --- Section Caractéristiques --- */
