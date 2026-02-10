@@ -26,15 +26,15 @@
 
         <!-- NAVIGATION INTERNE -->
         <nav class="subnav">
-            <button onclick="scrollToSection('caracteristiques')">Caractéristiques</button>
-            <button onclick="scrollToSection('competences')">Compétences</button>
-            <button onclick="scrollToSection('talents')">Talents</button>
-            <button onclick="scrollToSection('sorts')">Sorts</button>
-            <button onclick="scrollToSection('carrieres')">Carrières</button>
+            <button onclick="openTab('caracteristiques')">Caractéristiques</button>
+            <button onclick="openTab('competences')">Compétences</button>
+            <button onclick="openTab('talents')">Talents</button>
+            <button onclick="openTab('sorts')">Sorts</button>
+            <button onclick="openTab('carrieres')">Carrières</button>
         </nav>
 
         <!-- SECTION CARACTÉRISTIQUES -->
-        <details class="collapsible-section" id="caracteristiques">
+        <section class="tab-section" id="caracteristiques">
             <summary>
                 <div class="summary-header">
                     <h2>Caractéristiques</h2>
@@ -81,12 +81,12 @@
                     </div>
                 </div>
             </div>
-        </details>
+        </section>
 
         <hr class="separator">
 
         <!-- SECTION COMPÉTENCES -->
-        <details class="collapsible-section" id="competences">
+        <section class="tab-section" id="competences">
             <summary>
                 <div class="summary-header">
                     <h2>Compétences</h2>
@@ -175,12 +175,12 @@
                      </table>
                 </div>
             </div>
-        </details>
+        </section>
         
         <hr class="separator">
 
         <!-- SECTION TALENTS -->
-        <details class="collapsible-section" id="talents">
+        <section class="tab-section" id="talents">
             <summary>
                 <div class="summary-header">
                     <h2>Talents</h2>
@@ -189,12 +189,12 @@
             <div class="collapsible-content">
                 <p>Les talents sont des capacités passives ou actives uniques à votre personnage. Insérez ici la liste de vos talents.</p>
             </div>
-        </details>
+        </section>
 
         <hr class="separator">
 
         <!-- SECTION SORTS -->
-        <details class="collapsible-section" id="sorts">
+        <section class="tab-section" id="sorts">
             <summary>
                 <div class="summary-header">
                     <h2>Sorts</h2>
@@ -203,12 +203,12 @@
             <div class="collapsible-content">
                 <p>La magie de The Hope Heritage est puissante. Listez ici les sorts et enchantements disponibles.</p>
             </div>
-        </details>
+        </section>
 
         <hr class="separator">
 
         <!-- SECTION CARRIÈRES -->
-        <details class="collapsible-section" id="carrieres">
+        <section class="tab-section" id="carrieres">
             <summary>
                 <div class="summary-header">
                     <h2>Carrières</h2>
@@ -1200,7 +1200,7 @@
                     </details>
                 </div>
             </div>
-        </details>
+        </section>
     </main>
     
 <!-- SCRIPTS -->
@@ -1219,6 +1219,18 @@ function filterSkills() {
 
 function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+<script>
+function openTab(id) {
+    // cacher toutes les sections
+    document.querySelectorAll('.tab-section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+
+    // afficher la section choisie
+    document.getElementById(id).style.display = 'block';
 }
 </script>
 
