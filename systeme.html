@@ -207,14 +207,24 @@
                 </div>
             </summary>
 
-            <div class="collapsible-content">
-                <p>Choisissez une carrière pour définir l'évolution de votre personnage et accéder à des compétences spécifiques.</p>
+            <p>Choisissez une carrière pour définir l'évolution de votre personnage et accéder à des compétences spécifiques.</p>
                 
-                <div class="classes-container">
+            <div class="career-tabs">
+
+                <nav class="career-subnav">
+                    <button onclick="openCareer('egide')">Égide</button>
+                    <button onclick="openCareer('affide')">Affidé</button>
+                    <button onclick="openCareer('mire')">Mire</button>
+                    <button onclick="openCareer('thaumaturge')">Thaumaturge</button>
+                    <button onclick="openCareer('evzone')">Evzone</button>
+                    <button onclick="openCareer('demiurge')">Démiurge</button>
+                    <button onclick="openCareer('palabre')">Palabre</button>
+                    <button onclick="openCareer('sereno')">Sereno</button>
+                </nav>
 
                     <!-- ==== EGIDE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="egide">
                         <summary>Égide</summary> 
                         
                         <div class="class-desc">
@@ -324,11 +334,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
 
                     <!-- ==== AFFIDE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="affide">
                         <summary>Affidé</summary>
                     <div class="class-desc">
                             <p>
@@ -441,11 +451,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
 
                     <!-- ==== MIRE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="mire">
                         <summary>Mire</summary>
                     <div class="class-desc">
                             <p>
@@ -554,11 +564,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
                     
                     <!-- ==== THAUMATURGE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="thaumaturge">
                         <summary>Thaumaturge</summary>
                     <div class="class-desc">
                             <p>
@@ -668,11 +678,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
                     
                     <!-- ==== EVZONE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="evzone">
                         <summary>Evzone</summary>
                         <div class="class-desc">
                             <p>
@@ -817,11 +827,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
 
                     <!-- ==== DEMIURGE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="demiurge">
                         <summary>Démiurge</summary>
                         <div class="class-desc">
                             <p>
@@ -962,11 +972,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
 
                     <!-- ==== PALABRE ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="palabre">
                         <summary>Palabre</summary>
                         <div class="class-desc">
                             <p>
@@ -1072,11 +1082,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
 
                     <!-- ==== SERENO ==== -->
                     
-                    <details class="class-item">
+                    <section class="career-section" id="sereno">
                         <summary>Sereno</summary>
                         <div class="class-desc">
                             <p>
@@ -1189,7 +1199,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </details>
+                    </section>
                 </div>
             </div>
         </section>
@@ -1222,6 +1232,16 @@ function openTab(id) {
     });
 
     // afficher la section choisie
+    document.getElementById(id).style.display = 'block';
+}
+</script>
+
+<script>
+function openCareer(id) {
+    document.querySelectorAll('.career-section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+
     document.getElementById(id).style.display = 'block';
 }
 </script>
