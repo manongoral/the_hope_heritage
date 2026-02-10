@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Système de jeu - The Hope Heritage</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
 
+    <!-- NAVIGATION PRINCIPALE -->
     <nav class="navbar">
         <div class="nav-logo">The Hope Heritage</div>
         <ul class="nav-links">
@@ -18,9 +21,20 @@
     </nav>
 
     <main class="content-section">
+
         <h1>Système de jeu</h1>
-    
-        <details class="collapsible-section">
+
+        <!-- NAVIGATION INTERNE -->
+        <nav class="subnav">
+            <button onclick="scrollToSection('caracteristiques')">Caractéristiques</button>
+            <button onclick="scrollToSection('competences')">Compétences</button>
+            <button onclick="scrollToSection('talents')">Talents</button>
+            <button onclick="scrollToSection('sorts')">Sorts</button>
+            <button onclick="scrollToSection('carrieres')">Carrières</button>
+        </nav>
+
+        <!-- SECTION CARACTÉRISTIQUES -->
+        <details class="collapsible-section" id="caracteristiques">
             <summary>
                 <div class="summary-header">
                     <h2>Caractéristiques</h2>
@@ -68,10 +82,11 @@
                 </div>
             </div>
         </details>
-    
+
         <hr class="separator">
 
-        <details class="collapsible-section">
+        <!-- SECTION COMPÉTENCES -->
+        <details class="collapsible-section" id="competences">
             <summary>
                 <div class="summary-header">
                     <h2>Compétences</h2>
@@ -79,7 +94,6 @@
             </summary>
 
             <div class="collapsible-content">
-            
                 <p>
                     Diverses compétences, décrites ci-après, se rapportent à une ou deux caractéristiques. Posséder une compétence permet à votre personnage de bénéficier d'un bonus sur les jets de dés pour lesquels elle est applicable. 
                     Une compétence peut être maîtrisée au niveau 1, 2 ou 3. Le bonus conféré est respectivement de +5, +10 et +15. Les compétences peuvent être obtenues en dépensant de l'XP. 
@@ -89,7 +103,7 @@
                 <div class="search-container">
                     <input type="text" id="skillSearch" onkeyup="filterSkills()" placeholder="Rechercher une compétence (ex: Acrobatie, Force, Perception...)">
                 </div>
-            
+                
                 <div class="table-wrapper">
                     <table id="skillTable">
                         <thead>
@@ -165,7 +179,8 @@
         
         <hr class="separator">
 
-        <details class="collapsible-section">
+        <!-- SECTION TALENTS -->
+        <details class="collapsible-section" id="talents">
             <summary>
                 <div class="summary-header">
                     <h2>Talents</h2>
@@ -178,7 +193,8 @@
 
         <hr class="separator">
 
-        <details class="collapsible-section">
+        <!-- SECTION SORTS -->
+        <details class="collapsible-section" id="sorts">
             <summary>
                 <div class="summary-header">
                     <h2>Sorts</h2>
@@ -191,12 +207,14 @@
 
         <hr class="separator">
 
-        <details class="collapsible-section">
+        <!-- SECTION CARRIÈRES -->
+        <details class="collapsible-section" id="carrieres">
             <summary>
                 <div class="summary-header">
                     <h2>Carrières</h2>
                 </div>
             </summary>
+
             <div class="collapsible-content">
                 <p>Choisissez une carrière pour définir l'évolution de votre personnage et accéder à des compétences spécifiques.</p>
                 
@@ -1184,7 +1202,8 @@
             </div>
         </details>
     </main>
-
+    
+<!-- SCRIPTS -->
 <script>
 function filterSkills() {
     let input = document.getElementById("skillSearch");
@@ -1194,12 +1213,12 @@ function filterSkills() {
 
     for (let i = 1; i < tr.length; i++) {
         let textContent = tr[i].textContent.toLowerCase();
-        if (textContent.indexOf(filter) > -1) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
-        }
+        tr[i].style.display = textContent.indexOf(filter) > -1 ? "" : "none";
     }
+}
+
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 
