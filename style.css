@@ -293,10 +293,6 @@ textarea {
     border-bottom: 1px solid #444;
 }
 
-#skillTable tr:hover {
-    background: #3a3a3a;
-}
-
 
 /* CONTENEUR DE BADGES DANS LA CELLULE */
 .tag-container {
@@ -613,9 +609,5 @@ details summary::-webkit-details-marker {
 
 .career-section tr:nth-child(odd) {
     background: #1f1f1f;
-}
-
-.career-section tr:hover {
-    background: none;
 }
 
