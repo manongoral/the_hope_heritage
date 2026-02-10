@@ -549,3 +549,36 @@ details summary::-webkit-details-marker {
 #caracteristiques {
     display: block;
 }
+
+/* --- Carrières : système d'onglets --- */
+
+.career-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.career-subnav button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.career-subnav button:hover {
+    background: #555;
+}
+
+.career-section {
+    display: none;
+}
+
+/* afficher la première carrière par défaut */
+#egide {
+    display: block;
+}
