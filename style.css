@@ -540,3 +540,12 @@ details summary::-webkit-details-marker {
 .subnav button:active {
     transform: scale(0.97);
 }
+
+.tab-section {
+    display: none; /* toutes les sections sont cachées au départ */
+}
+
+/* tu peux afficher la première section par défaut */
+#caracteristiques {
+    display: block;
+}
