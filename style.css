@@ -523,3 +523,46 @@ details summary::-webkit-details-marker {
 .class-item summary::-webkit-details-marker {
     display: none;
 }
+
+/* Barre d'onglets */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Pour le mobile */
+    border-bottom: 1px solid var(--primary);
+    padding-bottom: 15px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--text-light);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.tab-btn:hover {
+    background: rgba(193, 154, 107, 0.2);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: #000;
+    font-weight: bold;
+}
+
+/* Gestion de l'affichage du contenu */
+.tab-content {
+    display: none; /* Cache tout par défaut */
+}
+
+.tab-content.show {
+    display: block; /* Affiche la section active */
+    animation: fadeIn 0.4s ease-out;
+}
