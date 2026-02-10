@@ -616,5 +616,6 @@ details summary::-webkit-details-marker {
 }
 
 .career-section tr:hover {
-    background: #3a3a3a;      /* survol élégant */
+    background: inherit;
 }
+
