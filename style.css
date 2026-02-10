@@ -272,52 +272,31 @@ textarea {
 
 /* Conteneur pour limiter la largeur si besoin, mais le tableau fera 100% dedans */
 .table-wrapper {
-    width: 100%;
     overflow-x: auto;
-    margin-top: 30px;
 }
 
 #skillTable {
-    width: 100% !important;
-    table-layout: fixed !important; /* FORCE le respect des % */
-    border-collapse: collapse !important;
-    background-color: #2a2a2e;
-    border: 1px solid var(--primary);
-}
-
-/* RÉGLAGE STRICT DES COLONNES : 25% | 25% | 50% */
-#skillTable th:nth-child(1), 
-#skillTable td:nth-child(1) { width: 25% !important; }
-
-#skillTable th:nth-child(2), 
-#skillTable td:nth-child(2) { width: 25% !important; }
-
-#skillTable th:nth-child(3), 
-#skillTable td:nth-child(3) { width: 50% !important; }
-
-/* ALIGNEMENT VERTICAL ET ESPACEMENT */
-#skillTable th, 
-#skillTable td {
-    padding: 35px 20px !important; /* Espacement entre les lignes */
-    vertical-align: middle !important; /* Alignement parfait sur la ligne */
-    text-align: left;
-    border-bottom: 1px solid #3d3d42;
-    box-sizing: border-box;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 
 #skillTable th {
-    background-color: #000;
-    color: var(--primary);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
 }
 
-#skillTable td:first-child {
-    font-weight: bold;
-    color: var(--primary);
-    font-size: 1.1rem;
+#skillTable td {
+    padding: 10px;
+    border-bottom: 1px solid #444;
 }
+
+#skillTable tr:hover {
+    background: #3a3a3a;
+}
+
 
 /* CONTENEUR DE BADGES DANS LA CELLULE */
 .tag-container {
@@ -383,9 +362,11 @@ textarea {
 }
 
 .separator {
-    margin: 50px 0;
-    border: 0;
-    border-top: 1px solid #333;
+    border: none;
+    height: 2px;
+    background: #444;
+    margin: 40px 0;
+    border-radius: 2px;
 }
 
 /* --- Ajustements Compétences --- */
@@ -403,33 +384,33 @@ details summary::-webkit-details-marker {
     display: none !important;
 }
 
+/* --- Sections repliables --- */
+.collapsible-section {
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 25px;
+    background: #2a2a2a;
+    overflow: hidden;
+}
+
 .collapsible-section summary {
     cursor: pointer;
-    outline: none;
+    padding: 15px 20px;
+    background: #333;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    list-style: none;
 }
 
-/* Style du titre qui sert de bouton */
-.collapsible-section summary h2 {
-    transition: all 0.3s ease;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Effet au survol : le titre s'éclaire et le bord doré s'épaissit */
-.collapsible-section summary h2:hover {
-    background: rgba(193, 154, 107, 0.1); /* Léger fond doré */
-    color: #fff; /* Texte plus blanc */
-    border-left: 8px solid var(--primary); /* La barre dorée s'élargit */
-}
-
-/* Style quand la section est ouverte */
-.collapsible-section[open] summary h2 {
-    background: rgba(193, 154, 107, 0.15);
-    margin-bottom: 10px;
+.collapsible-section summary::-webkit-details-marker {
+    display: none;
 }
 
 .collapsible-content {
-    animation: fadeIn 0.3s ease-out;
+    padding: 20px;
+    background: #2a2a2a;
 }
 
 @keyframes fadeIn {
@@ -522,4 +503,40 @@ details summary::-webkit-details-marker {
 /* Suppression des marqueurs de liste par défaut */
 .class-item summary::-webkit-details-marker {
     display: none;
+}
+
+/* --- Barre de navigation interne --- */
+.subnav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0 35px 0;
+    padding: 12px 15px;
+    background: #1f1f1f;
+    border-radius: 8px;
+    position: sticky;
+    top: 70px; /* reste visible quand on scrolle */
+    z-index: 50;
+}
+
+.subnav button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.subnav button:hover {
+    background: #555;
+    transform: translateY(-2px);
+}
+
+.subnav button:active {
+    transform: scale(0.97);
 }
