@@ -582,3 +582,39 @@ details summary::-webkit-details-marker {
 #egide {
     display: block;
 }
+
+/* --- TABLEAUX DES CARRIÈRES --- */
+
+.career-section table {
+    width: 90%;               /* largeur plus élégante */
+    margin: 20px auto;        /* centre le tableau */
+    border-collapse: collapse;
+    background: #2a2a2a;      /* fond harmonisé */
+    border-radius: 8px;
+    overflow: hidden;         /* arrondis visibles */
+}
+
+.career-section th,
+.career-section td {
+    border: 1px solid #444;   /* bordures visibles */
+    padding: 10px 12px;
+    text-align: center;
+}
+
+.career-section th {
+    background: #333;
+    color: #fff;
+    font-weight: 700;
+}
+
+.career-section tr:nth-child(even) {
+    background: #262626;      /* alternance des lignes */
+}
+
+.career-section tr:nth-child(odd) {
+    background: #1f1f1f;
+}
+
+.career-section tr:hover {
+    background: #3a3a3a;      /* survol élégant */
+}
